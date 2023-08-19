@@ -156,6 +156,7 @@
     <ClInclude Include="dependencies\imgui\imstb_rectpack.h" />
     <ClInclude Include="dependencies\imgui\imstb_textedit.h" />
     <ClInclude Include="dependencies\imgui\imstb_truetype.h" />
+    <ClInclude Include="dependencies\imgui\stb_image.h" />
     <ClInclude Include="dependencies\Zycore\Allocator.h" />
     <ClInclude Include="dependencies\Zycore\API\Memory.h" />
     <ClInclude Include="dependencies\Zycore\API\Process.h" />
@@ -208,6 +209,7 @@
     <ClInclude Include="dependencies\zydis\Zydis.h" />
     <ClInclude Include="interface\renderer.hpp" />
     <ClInclude Include="interface\style.h" />
+    <ClInclude Include="interface\views\ModulesViewer.hpp" />
     <ClInclude Include="interface\views\StringsViewer.hpp" />
     <ClInclude Include="interface\views\TopBar.hpp" />
     <ClInclude Include="interface\views\MemoryViewer.hpp" />

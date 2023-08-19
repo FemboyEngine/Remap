@@ -4,19 +4,20 @@
 * With a focus on usability and performance.
 *
 * This file is part of Remap.
-* - views/processes.hpp
+* - views/MemoryViewer.hpp
 *
 * Code for memory viewer window.
 */
 
 #include <Zydis/Zydis.h>
+#include <iomanip>
+#include <sstream>
 #include <map>
 
 static char buffer[MAX_BUFFER_SIZE];
 
 SIZE_T bytesRead;
-SIZE_T size;
-LPCVOID base = nullptr;
+SIZE_T size = sizeof(buffer);
 
 uint64_t runtime_address = 0;
 uint64_t offset = 0;
@@ -38,18 +39,12 @@ void ui::views::MemoryViewer() noexcept
 	ImGui::Text("Process: %s", selected.c_str());
 	ImGui::Text("PID: %d", state::pid);
 
-	if (base == nullptr)
-	{
-		base = (LPCVOID)GetProcessBaseAddress(state::pid);
-		size = sizeof(buffer);
-
-		ReadProcessMemory(state::CurrentProcess, base, buffer, size, &bytesRead);
-
-		std::cout << "Invoked" << std::endl;
+    if (state::memory.size() == 0) {
+		state::memory.resize(size);
+		ReadProcessMemory(state::CurrentProcess, state::BaseAddress, state::memory.data(), size, &bytesRead);
 	}
 
     // use a flag to prevent the disassembler from being invoked every frame
-    // it fucking works without the flag, idk why the fuck it fails here with the flag
     if (state::disassembled == false) {
 
         ZydisDecoder decoder;
@@ -64,7 +59,7 @@ void ui::views::MemoryViewer() noexcept
         {
             ZydisDecodedInstruction instruction;
             ZydisDecodedOperand operands[ZYDIS_MAX_OPERAND_COUNT];
-            ZyanStatus status = ZydisDecoderDecodeFull(&decoder, &buffer[i], size - i, &instruction, operands);
+            ZyanStatus status = ZydisDecoderDecodeFull(&decoder, &state::memory[i], size - i, &instruction, operands);
             if (ZYAN_SUCCESS(status))
             {
                 char buffer[256];
@@ -85,18 +80,60 @@ void ui::views::MemoryViewer() noexcept
         ImGui::Text("Disassembled");
         ImGui::BeginChild("Disassembly", ImVec2(0, 0), true, ImGuiWindowFlags_HorizontalScrollbar);
 
+        // column headers
+        ImGui::Columns(3);
+        ImGui::Text("Address"); ImGui::NextColumn();
+        ImGui::Text("Bytes"); ImGui::NextColumn();
+        ImGui::Text("Disassembly"); ImGui::NextColumn();
+        ImGui::Separator();
+
+        // disassembly rows
         ImGuiListClipper clipper;
         clipper.Begin(disasmText.size());
         while (clipper.Step()) {
             for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
             {
-                uint64_t relative = disasmText[i].first + (uint64_t)base;
-                ImGui::Text("%016llX  %s", relative, disasmText[i].second.c_str());
+                std::string name = GetProcessName(state::pid);
+                uint64_t relative = disasmText[i].first;
 
-                // select
+                std::string bytes = "..."; // implement it later
+                std::string disassembly = disasmText[i].second;
+
+                // to show bytes
+                std::stringstream ss;
+                for (int i = 0; i < 16; i++) {
+                    ss << std::hex << std::uppercase << std::setw(2)
+                        << std::setfill('0') << (int)state::memory[relative + i] << " ";
+                }
+                bytes = ss.str();
+
+                // address column
+                ImGui::Text("%s+%llX", name.c_str(), relative); ImGui::NextColumn();
+
+                // bytes column
+                ImGui::Text(bytes.c_str()); ImGui::NextColumn();
+
+                // disassembly column
+                ImVec4 cyan = ImVec4(0.0f, 1.0f, 1.0f, 1.0f);
+                //ImGui::Text(disassembly.c_str()); ImGui::NextColumn();
+                // color instructions cyan, and the rest white
+                std::string instruction = disassembly.substr(0, disassembly.find(" "));
+                ImGui::TextColored(cyan, instruction.c_str());
+                ImGui::SameLine();
+                ImGui::Text(disassembly.substr(instruction.length()).c_str()); ImGui::NextColumn();
+
+                if (ImGui::IsItemHovered()) {
+                    ImGui::SetTooltip("%s", disassembly.c_str());
+                }
+
+                // click to copy
+                if (ImGui::IsItemClicked()) {
+                    ImGui::SetClipboardText(disassembly.c_str());
+                }
             }
         }
 
+        ImGui::Columns(1);
         ImGui::EndChild();
     }
 

@@ -18,7 +18,7 @@
 char searchBuffer[MAX_SEARCH_BUFFER_SIZE];
 std::string selected{};
 
-std::vector<std::string> processes = GetProcessNames();
+std::vector<std::string> processes = GetProcessesNames();
 
 void ui::views::Processes() noexcept
 {
@@ -58,6 +58,24 @@ void ui::views::Processes() noexcept
 			selected = processes[i];
 			state::pid = GetProcessIdByName(selected.c_str());
 			state::CurrentProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, state::pid);
+			state::BaseAddress = (LPCVOID)GetProcessBaseAddress(state::pid);
+
+			// read process memory and store it in state::memory vector
+			MEMORY_BASIC_INFORMATION mbi;
+			std::vector<uint8_t> buffer;
+			char* p = 0;
+			while (VirtualQueryEx(state::CurrentProcess, p, &mbi, sizeof(mbi))) {
+				if (mbi.State == MEM_COMMIT && (mbi.Protect & PAGE_GUARD) == 0 && mbi.Protect != PAGE_NOACCESS) {
+					std::vector<uint8_t> tempBuffer(mbi.RegionSize);
+					SIZE_T bytesRead;
+					if (ReadProcessMemory(state::CurrentProcess, p, &tempBuffer[0], mbi.RegionSize, &bytesRead)) {
+						buffer.insert(buffer.end(), tempBuffer.begin(), tempBuffer.end());
+					}
+				}
+				p += mbi.RegionSize;
+			}
+			state::memory = buffer;
+
 		}
 	}
 

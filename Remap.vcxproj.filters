@@ -254,5 +254,11 @@
     <ClInclude Include="interface\views\StringsViewer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="interface\views\ModulesViewer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\imgui\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

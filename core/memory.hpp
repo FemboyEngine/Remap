@@ -10,6 +10,22 @@
 const int MAX_SEARCH_BUFFER_SIZE = 256;
 const int MAX_BUFFER_SIZE = 1024 * 1024 * 10;
 
+// get process name by pid
+std::string GetProcessName(int pid) {
+	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, pid);
+	if (hProcess == nullptr) {
+		return "";
+	}
+	char szProcessName[MAX_PATH];
+	if (GetModuleBaseNameA(hProcess, nullptr, szProcessName, sizeof(szProcessName)) > 0) {
+		CloseHandle(hProcess);
+		return szProcessName;
+	}
+	CloseHandle(hProcess);
+	return "";
+}
+
+/*
 std::vector<std::string> GetProcessNames() {
 	DWORD processes[1024], cb_needed;
 	std::vector<std::string> process_names;
@@ -35,8 +51,24 @@ std::vector<std::string> GetProcessNames() {
 
 	return process_names;
 }
+*/
+// use GetProcessName to get all processes names
+std::vector<std::string> GetProcessesNames() {
+	DWORD processes[1024], cb_needed;
+	std::vector<std::string> process_names;
+	if (!EnumProcesses(processes, sizeof(processes), &cb_needed)) {
+		return process_names;
+	}
+	DWORD num = cb_needed / sizeof(DWORD);
+	for (DWORD i = 0; i < num; i++) {
+		std::string process_name = GetProcessName(processes[i]);
+		if (process_name != "") {
+			process_names.push_back(process_name);
+		}
+	}
+	return process_names;
+}
 
-// get process id by name using CreateToolhelp32Snapshot
 int GetProcessIdByName(const char* process_name) {
 	HANDLE hProcessSnap;
 	PROCESSENTRY32 pe32;
@@ -63,7 +95,6 @@ int GetProcessIdByName(const char* process_name) {
 	return pid;
 }
 
-// Get Process base address
 uintptr_t GetProcessBaseAddress(int pid) {
 	uintptr_t base_address = 0;
 	HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
@@ -84,4 +115,36 @@ uintptr_t GetProcessBaseAddress(int pid) {
 	}
 	CloseHandle(hProcess);
 	return base_address;
+}
+
+// function to get loaded modules in a process
+std::vector<std::string> GetLoadedModules(int pid) {
+	std::vector<std::string> modules;
+	HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
+	HMODULE hMods[1024];
+	DWORD cbNeeded;
+	unsigned int i;
+	if (hProcess == nullptr) {
+		return modules;
+	}
+	if (EnumProcessModules(hProcess, hMods, sizeof(hMods), &cbNeeded)) {
+		for (i = 0; i < (cbNeeded / sizeof(HMODULE)); i++) {
+			TCHAR szModName[MAX_PATH];
+			if (GetModuleFileNameEx(hProcess, hMods[i], szModName, sizeof(szModName) / sizeof(TCHAR))) {
+				char szModNameA[MAX_PATH];
+				WideCharToMultiByte(CP_ACP, 0, szModName, -1, szModNameA, MAX_PATH, NULL, NULL);
+				
+				// remove path from module name
+				std::string szModNameStr = szModNameA;
+				std::string::size_type pos = szModNameStr.find_last_of("\\/");
+				if (pos != std::string::npos) {
+					szModNameStr.erase(0, pos + 1);
+				}
+
+				modules.push_back(szModNameStr);
+			}
+		}
+	}
+	CloseHandle(hProcess);
+	return modules;
 }

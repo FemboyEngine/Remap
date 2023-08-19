@@ -9,14 +9,8 @@
 * Code for strings viewer window
 */
 
-static char rBuffer[MAX_BUFFER_SIZE];
-static char rSearchBuffer[MAX_SEARCH_BUFFER_SIZE];
-
 MEMORY_BASIC_INFORMATION memInfo;
-SIZE_T bytes_read;
-SIZE_T rSize;
 LPVOID address = NULL;
-LPCVOID rBase = nullptr;
 
 // vector to store the strings
 std::vector<std::string> strings;
@@ -35,19 +29,11 @@ void ui::views::StringsViewer() noexcept {
     ImGui::Text("Process: %s", selected.c_str());
     ImGui::Text("PID: %d", state::pid);
 
-    if (rBase == nullptr) {
-        rBase = (LPCVOID)GetProcessBaseAddress(state::pid);
-        rSize = sizeof(buffer);
-
-        ReadProcessMemory(state::CurrentProcess, rBase, rBuffer, rSize, &bytes_read);
-    }
-
-    // Dump Strings from the process
     if (state::mapped_strings == false) {
         std::string str;
-        for (int i = 0; i < bytes_read; i++) {
-            if (rBuffer[i] != '\0') {
-                str += rBuffer[i];
+        for (auto it = state::memory.begin(); it != state::memory.end(); ++it) {
+            if (*it != '\0') {
+                str += *it;
             }
             else {
                 if (!str.empty()) {
@@ -56,12 +42,10 @@ void ui::views::StringsViewer() noexcept {
                 }
             }
         }
-
         if (!str.empty()) {
             strings.push_back(str);
             str.clear();
         }
-
         state::mapped_strings = true;
     }
 

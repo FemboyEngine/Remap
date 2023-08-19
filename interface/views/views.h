@@ -19,4 +19,5 @@ namespace ui::views {
     void Processes() noexcept;
     void MemoryViewer() noexcept;
     void StringsViewer() noexcept;
+    void ModulesViewer() noexcept;
 }
