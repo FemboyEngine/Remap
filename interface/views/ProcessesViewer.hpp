@@ -14,7 +14,6 @@
 #include <core/state.h>
 #include <iostream>
 
-
 char searchBuffer[MAX_SEARCH_BUFFER_SIZE];
 std::string selected{};
 
@@ -22,9 +21,12 @@ std::vector<std::string> processes = GetProcessesNames();
 
 void ui::views::Processes() noexcept
 {
+	if (!states::running["Processes"])
+		return;
+
 	ImGui::Begin(
 		"Remap",
-		&state::isRunning,
+		&states::running["Processes"],
 		ImGuiWindowFlags_NoSavedSettings |
 		ImGuiWindowFlags_NoCollapse |
 		ImGuiWindowFlags_HorizontalScrollbar

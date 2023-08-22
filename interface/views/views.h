@@ -13,6 +13,7 @@
 */
 
 #pragma once
+#include <unordered_map>
 
 namespace ui::views {
     void TopBar() noexcept;
@@ -22,4 +23,14 @@ namespace ui::views {
     void ModulesViewer() noexcept;
 
     void NodeEditor() noexcept;
+}
+
+namespace ui::views::states {
+    std::unordered_map<std::string, bool> running = {
+		{ "Processes", false },
+		{ "Memory Viewer", false },
+		{ "Strings Viewer", false },
+		{ "Modules Viewer", false },
+		{ "Node Editor", false }
+	};
 }

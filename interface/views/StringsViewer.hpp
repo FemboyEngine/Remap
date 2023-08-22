@@ -16,9 +16,13 @@ LPVOID address = NULL;
 std::vector<std::string> strings;
 
 void ui::views::StringsViewer() noexcept {
+
+    if (!states::running["Strings Viewer"])
+        return;
+
     ImGui::Begin(
         "Strings Viewer",
-        &state::isRunning,
+        &states::running["Strings Viewer"],
         ImGuiWindowFlags_NoSavedSettings |
         ImGuiWindowFlags_NoCollapse |
         ImGuiWindowFlags_HorizontalScrollbar
@@ -31,9 +35,10 @@ void ui::views::StringsViewer() noexcept {
 
     if (state::mapped_strings == false) {
         std::string str;
+        str.reserve(state::memory.size()); // pre allocate memory for string
         for (auto it = state::memory.begin(); it != state::memory.end(); ++it) {
-            if (*it != '\0') {
-                str += *it;
+            if (isprint(*it)) {
+                str.push_back(*it);
             }
             else {
                 if (!str.empty()) {
@@ -51,8 +56,8 @@ void ui::views::StringsViewer() noexcept {
 
     if (state::mapped_strings) {
         for (int i = 0; i < strings.size(); i++) {
-			ImGui::Text("%s", strings[i].c_str());
-		}
+            ImGui::Text("%s", strings[i].c_str());
+        }
     }
 
     ImGui::End();

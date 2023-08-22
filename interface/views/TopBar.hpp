@@ -28,10 +28,16 @@ void ui::views::TopBar() noexcept
 
     if (ImGui::BeginMenu("View"))
     {
-		if (ImGui::MenuItem("Processes", "Ctrl+P"));
-		if (ImGui::MenuItem("Memory Viewer", "Ctrl+M"));
-		if (ImGui::MenuItem("Top Bar", "Ctrl+T"));
-		if (ImGui::MenuItem("Status Bar", "Ctrl+B"));
+		if (ImGui::MenuItem("Processes", "Ctrl+P"))
+			states::running["Processes"] = true;
+		if (ImGui::MenuItem("Memory Viewer", "Ctrl+M"))
+			states::running["Memory Viewer"] = true;
+		if (ImGui::MenuItem("Strings Viewer", "Ctrl+T"))
+			states::running["Strings Viewer"] = true;
+		if (ImGui::MenuItem("Modules Viewer", "Ctrl+L"))
+			states::running["Modules Viewer"] = true;
+		if (ImGui::MenuItem("Node Editor", "Ctrl+N"))
+			states::running["Node Editor"] = true;
 		ImGui::EndMenu();
 	}
 

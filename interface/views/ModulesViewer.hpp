@@ -17,9 +17,12 @@ std::vector<std::string> modules;
 
 void ui::views::ModulesViewer() noexcept
 {
+	if (!states::running["Modules Viewer"]) 
+		return;
+
 	ImGui::Begin(
 		"Modules Viewer",
-		&state::isRunning,
+		&states::running["Modules Viewer"],
 		ImGuiWindowFlags_NoSavedSettings |
 		ImGuiWindowFlags_NoCollapse |
 		ImGuiWindowFlags_HorizontalScrollbar
@@ -29,10 +32,8 @@ void ui::views::ModulesViewer() noexcept
 	ImGui::Text("Process: %s", selected.c_str());
 	ImGui::Text("PID: %d", state::pid);
 
-	if (modules.empty())
-	{
-		modules = GetLoadedModules(state::pid);
-	}
+	modules.clear();
+	modules = GetLoadedModules(state::pid);
 
 	for (auto& module : modules)
 	{

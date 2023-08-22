@@ -29,9 +29,13 @@ std::vector<char*> NewNodeINames;
 std::vector<char*> NewNodeONames;
 
 void ui::views::NodeEditor() noexcept {
+    
+    if (!states::running["Node Editor"])
+        return;
+
 	ImGui::Begin(
 		"Node Editor",
-		&state::isRunning,
+		&states::running["Node Editor"],
 		ImGuiWindowFlags_NoCollapse |
 		ImGuiWindowFlags_HorizontalScrollbar
 	);
