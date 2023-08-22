@@ -140,6 +140,7 @@
     <ClCompile Include="dependencies\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="dependencies\imgui\imgui_tables.cpp" />
     <ClCompile Include="dependencies\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="dependencies\imnodes\imnodes.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +158,8 @@
     <ClInclude Include="dependencies\imgui\imstb_textedit.h" />
     <ClInclude Include="dependencies\imgui\imstb_truetype.h" />
     <ClInclude Include="dependencies\imgui\stb_image.h" />
+    <ClInclude Include="dependencies\imnodes\imnodes.h" />
+    <ClInclude Include="dependencies\imnodes\imnodes_internal.h" />
     <ClInclude Include="dependencies\Zycore\Allocator.h" />
     <ClInclude Include="dependencies\Zycore\API\Memory.h" />
     <ClInclude Include="dependencies\Zycore\API\Process.h" />
@@ -210,6 +213,7 @@
     <ClInclude Include="interface\renderer.hpp" />
     <ClInclude Include="interface\style.h" />
     <ClInclude Include="interface\views\ModulesViewer.hpp" />
+    <ClInclude Include="interface\views\NodeEditor.hpp" />
     <ClInclude Include="interface\views\StringsViewer.hpp" />
     <ClInclude Include="interface\views\TopBar.hpp" />
     <ClInclude Include="interface\views\MemoryViewer.hpp" />

@@ -53,6 +53,9 @@ void ui::views::MemoryViewer() noexcept
         ZydisFormatter formatter;
         ZydisFormatterInit(&formatter, ZYDIS_FORMATTER_STYLE_INTEL);
 
+        // clear the disassembly text to prevent duplicates
+        disasmText.clear();
+
         int i = 0;
 
         while (i < size)

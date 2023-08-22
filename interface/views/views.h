@@ -20,4 +20,6 @@ namespace ui::views {
     void MemoryViewer() noexcept;
     void StringsViewer() noexcept;
     void ModulesViewer() noexcept;
+
+    void NodeEditor() noexcept;
 }

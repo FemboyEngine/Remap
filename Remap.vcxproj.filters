@@ -42,6 +42,9 @@
     <ClCompile Include="core\state.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dependencies\imnodes\imnodes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dependencies\GLFW\include\GLFW\glfw3.h">
@@ -258,6 +261,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dependencies\imgui\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\imnodes\imnodes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\imnodes\imnodes_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\views\NodeEditor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

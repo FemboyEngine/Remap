@@ -8,6 +8,9 @@
 * 
 * Code for rendering the interface.
 */
+
+#define _CRT_SECURE_NO_WARNINGS
+
 #define GL_CLAMP_TO_EDGE 0x812F
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -24,6 +27,7 @@
 #include "views/MemoryViewer.hpp"
 #include "views/StringsViewer.hpp"
 #include "views/ModulesViewer.hpp"
+#include "views/NodeEditor.hpp"
 #include "views/TopBar.hpp"
 
 #include "style.h"
@@ -66,6 +70,7 @@ namespace renderer {
         glfwMakeContextCurrent(window);
 
         ImGui::CreateContext();
+        ImNodes::CreateContext();
 
         ApplyCustomStyle();
 
@@ -110,9 +115,10 @@ namespace renderer {
             // windows here
             ui::views::TopBar();
             ui::views::Processes();
-            //ui::views::MemoryViewer();
+            ui::views::MemoryViewer();
             //ui::views::StringsViewer();
             //ui::views::ModulesViewer();
+            //ui::views::NodeEditor();
 
             ImGui::End();
 
