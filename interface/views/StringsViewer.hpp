@@ -1,7 +1,6 @@
 /*
 * Remap
 * A memory editor, written in C++ and ImGui.
-* With a focus on usability and performance.
 *
 * This file is part of Remap.
 * - views/processes.hpp
@@ -12,7 +11,6 @@
 MEMORY_BASIC_INFORMATION memInfo;
 LPVOID address = NULL;
 
-// vector to store the strings
 std::vector<std::string> strings;
 
 void ui::views::StringsViewer() noexcept {
@@ -29,9 +27,6 @@ void ui::views::StringsViewer() noexcept {
     );
 
     if (state::CurrentProcess == NULL && state::pid == 0) return;
-
-    ImGui::Text("Process: %s", selected.c_str());
-    ImGui::Text("PID: %d", state::pid);
 
     if (state::mapped_strings == false) {
         std::string str;

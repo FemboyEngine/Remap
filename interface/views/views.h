@@ -1,10 +1,6 @@
 /*
 * Remap
 * A memory editor, written in C++ and ImGui.
-* With a focus on usability and performance.
-*
-* Like Cheat Engine, Reclass.
-* With better User Interface
 *
 * This file is part of Remap.
 * - views/views.h
@@ -23,6 +19,7 @@ namespace ui::views {
     void ModulesViewer() noexcept;
 
     void NodeEditor() noexcept;
+    void ScriptingView() noexcept;
 }
 
 namespace ui::views::states {

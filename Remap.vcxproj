@@ -119,7 +119,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;ZYDIS_STATIC_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\Mole\Projects\Repos\Remap\dependencies;D:\Mole\Projects\Repos\Remap\dependencies\GLFW\include;D:\Mole\Projects\Repos\Remap;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Mole\Projects\Repos\Remap\dependencies;D:\Mole\Projects\Repos\Remap\dependencies\GLFW\include;D:\Mole\Projects\Repos\Remap;D:\Mole\Projects\Repos\Remap\dependencies\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -127,8 +127,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;Zydis.lib;Zycore.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\Mole\Projects\Repos\Remap\dependencies\GLFW\lib-vc2022;D:\Mole\Projects\Repos\Remap\dependencies\Zydis\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;Zydis.lib;Zycore.lib;lua54.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Mole\Projects\Repos\Remap\dependencies\GLFW\lib-vc2022;D:\Mole\Projects\Repos\Remap\dependencies\Zydis\lib;D:\Mole\Projects\Repos\Remap\dependencies\lua;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -140,6 +140,7 @@
     <ClCompile Include="dependencies\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="dependencies\imgui\imgui_tables.cpp" />
     <ClCompile Include="dependencies\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="dependencies\imjson\imjson.cpp" />
     <ClCompile Include="dependencies\imnodes\imnodes.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -158,8 +159,15 @@
     <ClInclude Include="dependencies\imgui\imstb_textedit.h" />
     <ClInclude Include="dependencies\imgui\imstb_truetype.h" />
     <ClInclude Include="dependencies\imgui\stb_image.h" />
+    <ClInclude Include="dependencies\imjson\imjson.h" />
     <ClInclude Include="dependencies\imnodes\imnodes.h" />
     <ClInclude Include="dependencies\imnodes\imnodes_internal.h" />
+    <ClInclude Include="dependencies\lua\include\lauxlib.h" />
+    <ClInclude Include="dependencies\lua\include\lua.h" />
+    <ClInclude Include="dependencies\lua\include\lua.hpp" />
+    <ClInclude Include="dependencies\lua\include\luaconf.h" />
+    <ClInclude Include="dependencies\lua\include\lualib.h" />
+    <ClInclude Include="dependencies\nlohmann\json.hpp" />
     <ClInclude Include="dependencies\Zycore\Allocator.h" />
     <ClInclude Include="dependencies\Zycore\API\Memory.h" />
     <ClInclude Include="dependencies\Zycore\API\Process.h" />
@@ -214,6 +222,7 @@
     <ClInclude Include="interface\style.h" />
     <ClInclude Include="interface\views\ModulesViewer.hpp" />
     <ClInclude Include="interface\views\NodeEditor.hpp" />
+    <ClInclude Include="interface\views\ScriptingView.hpp" />
     <ClInclude Include="interface\views\StringsViewer.hpp" />
     <ClInclude Include="interface\views\TopBar.hpp" />
     <ClInclude Include="interface\views\MemoryViewer.hpp" />

@@ -1,7 +1,6 @@
 /*
 * Remap
 * A memory editor, written in C++ and ImGui.
-* With a focus on usability and performance.
 *
 * This file is part of Remap.
 * - views/processes.hpp
@@ -54,7 +53,6 @@ void ui::views::Processes() noexcept
 			ImGui::Text(processes[i].c_str());
 		}
 
-		// click to select
 		if (ImGui::IsItemClicked())
 		{
 			selected = processes[i];

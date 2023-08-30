@@ -1,7 +1,7 @@
 /*
 * Remap
 * A memory editor, written in C++ and ImGui.
-* With a focus on usability and performance.
+
 *
 * This file is part of Remap.
 * - views/ModulesViewer.hpp
@@ -28,9 +28,6 @@ void ui::views::ModulesViewer() noexcept
 		ImGuiWindowFlags_HorizontalScrollbar
 	);
 	if (state::CurrentProcess == NULL && state::pid == 0) return;
-
-	ImGui::Text("Process: %s", selected.c_str());
-	ImGui::Text("PID: %d", state::pid);
 
 	modules.clear();
 	modules = GetLoadedModules(state::pid);

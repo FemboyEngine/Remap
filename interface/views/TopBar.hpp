@@ -1,15 +1,19 @@
 #ifndef TOPBAR_HPP
 #define TOPBAR_HPP
 
+#include <imjson/imjson.h>
+#include <interface/style.h>
+
 void ui::views::TopBar() noexcept
 {
     ImGui::BeginMainMenuBar();
 
-	// does nothing yet
     if (ImGui::BeginMenu("File"))
     {
 		if (ImGui::MenuItem("Open", "Ctrl+O"));
 		if (ImGui::MenuItem("Save", "Ctrl+S"));
+		if (ImGui::MenuItem("Import", "Ctrl+I"))
+			LoadStyle();
 		if (ImGui::MenuItem("Exit", "Alt+F4"));
 
         ImGui::EndMenu();
@@ -28,18 +32,14 @@ void ui::views::TopBar() noexcept
 
     if (ImGui::BeginMenu("View"))
     {
-		if (ImGui::MenuItem("Processes", "Ctrl+P"))
-			states::running["Processes"] = true;
-		if (ImGui::MenuItem("Memory Viewer", "Ctrl+M"))
-			states::running["Memory Viewer"] = true;
-		if (ImGui::MenuItem("Strings Viewer", "Ctrl+T"))
-			states::running["Strings Viewer"] = true;
-		if (ImGui::MenuItem("Modules Viewer", "Ctrl+L"))
-			states::running["Modules Viewer"] = true;
-		if (ImGui::MenuItem("Node Editor", "Ctrl+N"))
-			states::running["Node Editor"] = true;
-		ImGui::EndMenu();
-	}
+        for (auto& [key, value] : states::running) {
+            if (ImGui::MenuItem(key.c_str())) {
+				value = !value;
+			}
+		}
+
+        ImGui::EndMenu();
+    }
 
 	if (ImGui::BeginMenu("Help"));
 

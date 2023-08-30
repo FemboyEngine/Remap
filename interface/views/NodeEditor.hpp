@@ -1,7 +1,6 @@
 /*
 * Remap
 * A memory editor, written in C++ and ImGui.
-* With a focus on usability and performance.
 *
 * This file is part of Remap.
 * - views/NodeEditor.hpp

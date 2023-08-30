@@ -11,6 +11,31 @@ inline ImVec4 HexToImVec4(int hex, float alpha = 1.0f)
     return ImVec4(r, g, b, alpha);
 }
 
+inline void LoadStyle()
+{
+    OPENFILENAME ofn;
+    wchar_t szFile[260];
+    ZeroMemory(&ofn, sizeof(ofn));
+    ofn.lStructSize = sizeof(ofn);
+    ofn.hwndOwner = NULL;
+    ofn.lpstrFile = szFile;
+    ofn.lpstrFile[0] = '\0';
+    ofn.nMaxFile = sizeof(szFile);
+    ofn.lpstrFilter = L"JSON\0*.json\0All\0*.*\0";
+    ofn.nFilterIndex = 1;
+    ofn.lpstrFileTitle = NULL;
+    ofn.nMaxFileTitle = 0;
+    ofn.lpstrInitialDir = NULL;
+    ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+    if (GetOpenFileName(&ofn)) {
+		std::wstring ws(szFile);
+		std::string filename(ws.begin(), ws.end());
+		imjson::load_theme_from_file(filename.c_str());
+		std::cout << "Loaded theme from " << filename << std::endl;
+	}
+}
+
 inline void ApplyCustomStyle()
 {
     auto& colors = ImGui::GetStyle().Colors;

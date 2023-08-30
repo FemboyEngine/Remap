@@ -1,7 +1,6 @@
 /*
 * Remap
 * A memory editor, written in C++ and ImGui.
-* With a focus on usability and performance.
 *
 * This file is part of Remap.
 * - renderer.hpp
@@ -28,6 +27,7 @@
 #include "views/StringsViewer.hpp"
 #include "views/ModulesViewer.hpp"
 #include "views/NodeEditor.hpp"
+#include "views/ScriptingView.hpp"
 #include "views/TopBar.hpp"
 
 #include "style.h"
@@ -101,24 +101,13 @@ namespace renderer {
             ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
             ImGui::Begin("Background", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoBringToFrontOnFocus);
 
-            static GLuint texture_id = 0;
-            static int image_width = 0;
-            static int image_height = 0;
-            if (texture_id == 0)
-				LoadTextureFromFile("C:\\Users\\Mole\\Desktop\\Pics\\thighs.jpg",
-                    &texture_id, &image_width, &image_height);
-
-            //ImGui::Begin("Thighs");
-            //ImGui::Image((void*)texture_id, ImVec2(ImGui::GetWindowSize().x, ImGui::GetWindowSize().y));
-            //ImGui::End();
-
-            // windows here
             ui::views::TopBar();
             ui::views::Processes();
             ui::views::MemoryViewer();
             ui::views::StringsViewer();
             ui::views::ModulesViewer();
             ui::views::NodeEditor();
+            ui::views::ScriptingView();
 
             ImGui::End();
 
