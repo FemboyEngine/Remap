@@ -29,29 +29,35 @@ void ui::views::StringsViewer() noexcept {
     if (state::CurrentProcess == NULL && state::pid == 0) return;
 
     if (state::mapped_strings == false) {
+        strings.clear();
+
         std::string str;
-        str.reserve(state::memory.size()); // pre allocate memory for string
+        str.reserve(state::memory.size());
+        strings.reserve(state::memory.size() / 10);
         for (auto it = state::memory.begin(); it != state::memory.end(); ++it) {
             if (isprint(*it)) {
                 str.push_back(*it);
             }
             else {
                 if (!str.empty()) {
-                    strings.push_back(str);
-                    str.clear();
+                    strings.emplace_back(std::move(str));
                 }
             }
         }
         if (!str.empty()) {
-            strings.push_back(str);
-            str.clear();
+            strings.emplace_back(std::move(str));
         }
         state::mapped_strings = true;
     }
 
     if (state::mapped_strings) {
-        for (int i = 0; i < strings.size(); i++) {
-            ImGui::Text("%s", strings[i].c_str());
+        ImGuiListClipper clipper;
+        clipper.Begin(strings.size());
+
+        while (clipper.Step()) {
+            for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; i++) {
+                ImGui::Text("%s", strings[i].c_str());
+            }
         }
     }
 

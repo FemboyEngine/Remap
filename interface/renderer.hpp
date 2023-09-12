@@ -115,6 +115,8 @@ namespace renderer {
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
             glfwSwapBuffers(window);
+
+            dirty = false;
         }
     }
 

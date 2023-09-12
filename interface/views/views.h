@@ -28,6 +28,7 @@ namespace ui::views::states {
 		{ "Memory Viewer", false },
 		{ "Strings Viewer", false },
 		{ "Modules Viewer", false },
-		{ "Node Editor", false }
+		{ "Node Editor", false },
+        { "Scripting View", false }
 	};
 }

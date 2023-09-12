@@ -80,6 +80,7 @@ void ui::views::Processes() noexcept
 			}
 			state::memory = buffer;
 			state::disassembled = false; // reset disassembled flag
+			state::mapped_strings = false;
 		}
 	}
 
