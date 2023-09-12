@@ -1,7 +1,6 @@
 /*
 * Remap
 * A memory editor, written in C++ and ImGui.
-
 *
 * This file is part of Remap.
 * - views/ModulesViewer.hpp
@@ -12,7 +11,6 @@
 #include <vector>
 #include <TlHelp32.h>
 
-// vector of modules
 std::vector<std::string> modules;
 
 void ui::views::ModulesViewer() noexcept

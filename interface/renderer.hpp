@@ -80,15 +80,8 @@ namespace renderer {
     }
 
     void loop(GLFWwindow* window) {
-        bool dirty = true;
         while (!glfwWindowShouldClose(window)) {
             glfwPollEvents();
-
-            if (ImGui::IsMousePosValid())
-                dirty = true;
-
-            if (!dirty)
-                continue;
 
             glClear(GL_COLOR_BUFFER_BIT);
 
@@ -115,8 +108,6 @@ namespace renderer {
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
             glfwSwapBuffers(window);
-
-            dirty = false;
         }
     }
 
