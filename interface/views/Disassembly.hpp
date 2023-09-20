@@ -13,7 +13,7 @@
 #include <sstream>
 #include <map>
 
-static char buffer[MAX_BUFFER_SIZE];
+static char buffer[kMaxBufferSize];
 
 SIZE_T size = sizeof(buffer);
 
@@ -93,7 +93,7 @@ void ui::views::Disassembly() {
         while (clipper.Step()) {
             for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
             {
-                std::string name = GetProcessName(state::pid);
+                std::string name = remap::GetProcessName(state::pid);
 
                 uint64_t address = std::get<0>(disasmText[i]);
                 std::string disassembly = std::get<1>(disasmText[i]);

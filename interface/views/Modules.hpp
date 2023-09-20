@@ -28,7 +28,7 @@ void ui::views::Modules() {
 	if (state::CurrentProcess == NULL && state::pid == 0) return;
 
 	modules.clear();
-	modules = GetLoadedModules(state::pid);
+	modules = remap::GetLoadedModules(state::pid);
 
 	for (auto& module : modules)
 	{

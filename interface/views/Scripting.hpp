@@ -62,13 +62,13 @@ void ui::views::Scripting() {
     // push memory functions
     lua_pushcfunction(L, [](lua_State* L) -> int {
         int pid = lua_tointeger(L, 1);
-        lua_pushstring(L, GetProcessName(pid).c_str());
+        lua_pushstring(L, remap::GetProcessName(pid).c_str());
         return 1;
         });
     lua_setglobal(L, "GetProcessName");
 
     lua_pushcfunction(L, [](lua_State* L) -> int {
-        std::vector<std::string> process_names = GetProcessesNames();
+        std::vector<std::string> process_names = remap::GetProcessesNames();
         lua_newtable(L);
         for (int i = 0; i < process_names.size(); i++) {
             lua_pushinteger(L, i + 1);
@@ -81,21 +81,21 @@ void ui::views::Scripting() {
 
     lua_pushcfunction(L, [](lua_State* L) -> int {
         const char* process_name = lua_tostring(L, 1);
-        lua_pushinteger(L, GetProcessIdByName(process_name));
+        lua_pushinteger(L, remap::GetProcessIdByName(process_name));
         return 1;
         });
     lua_setglobal(L, "GetProcessIdByName");
 
     lua_pushcfunction(L, [](lua_State* L) -> int {
         int pid = lua_tointeger(L, 1);
-        lua_pushinteger(L, GetProcessBaseAddress(pid));
+        lua_pushinteger(L, remap::GetProcessBaseAddress(pid));
         return 1;
         });
     lua_setglobal(L, "GetProcessBaseAddress");
 
     lua_pushcfunction(L, [](lua_State* L) -> int {
         int pid = lua_tointeger(L, 1);
-        std::vector<std::string> modules = GetLoadedModules(pid);
+        std::vector<std::string> modules = remap::GetLoadedModules(pid);
         lua_newtable(L);
         for (int i = 0; i < modules.size(); i++) {
             lua_pushinteger(L, i + 1);

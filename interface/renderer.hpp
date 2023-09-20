@@ -8,14 +8,19 @@
 * Code for rendering the interface.
 */
 
+#ifndef RENDERER_HPP
+#define RENDERER_HPP
+
 #define _CRT_SECURE_NO_WARNINGS
 
+#include <Windows.h>
+
+#include <GLFW/glfw3.h>
 #include <imgui/imgui.h>
 #include <imgui/imgui_impl_glfw.h>
 #include <imgui/imgui_impl_opengl3.h>
-#include <GLFW/glfw3.h>
-#include <vector>
 #include <string>
+#include <vector>
 
 #include "views/Processes.hpp"
 #include "views/Disassembly.hpp"
@@ -27,11 +32,14 @@
 
 #include "style.h"
 
+int WINDOW_WIDTH = 1280;
+int WINDOW_HEIGHT = 720;
+
 namespace renderer {
 
     void Init(GLFWwindow*& window) {
         glfwInit();
-        window = glfwCreateWindow(1280, 720, "Remap", NULL, NULL);
+        window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Remap", NULL, NULL);
         glfwMakeContextCurrent(window);
 
         ImGui::CreateContext();
@@ -91,3 +99,5 @@ namespace renderer {
     }
 
 }
+
+#endif // RENDERER_HPP

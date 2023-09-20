@@ -13,10 +13,10 @@
 #include <core/state.h>
 #include <iostream>
 
-char searchBuffer[MAX_SEARCH_BUFFER_SIZE];
+char searchBuffer[kMaxBufferSize];
 std::string selected{};
 
-std::vector<std::string> processes = GetProcessesNames();
+std::vector<std::string> processes = remap::GetProcessesNames();
 
 void ui::views::Processes() {
 	if (!states::running["Processes"])
@@ -56,9 +56,9 @@ void ui::views::Processes() {
 		if (ImGui::IsItemClicked())
 		{
 			selected = processes[i];
-			state::pid = GetProcessIdByName(selected.c_str());
+			state::pid = remap::GetProcessIdByName(selected.c_str());
 			state::CurrentProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, state::pid);
-			state::BaseAddress = (LPCVOID)GetProcessBaseAddress(state::pid);
+			state::BaseAddress = (LPCVOID)remap::GetProcessBaseAddress(state::pid);
 
 			// temporary
 			MEMORY_BASIC_INFORMATION mbi;
