@@ -7,6 +7,10 @@
 void ui::views::TopBar() {
     ImGui::BeginMainMenuBar();
 
+	/* Remove this after implementing the options */
+	#pragma warning(push)
+	#pragma warning(disable: 4390) // ';': empty controlled statement found
+
     if (ImGui::BeginMenu("File"))
     {
 		if (ImGui::MenuItem("Open", "Ctrl+O"));
@@ -42,6 +46,7 @@ void ui::views::TopBar() {
 
 	if (ImGui::BeginMenu("Help"));
 
+	#pragma warning(pop)
     ImGui::EndMainMenuBar();
 }
 

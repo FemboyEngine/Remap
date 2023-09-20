@@ -138,7 +138,7 @@ void ui::views::NodeEditor() {
         }
 
         for (int i = 0; i < node.output_names.size(); i++) {
-            ImNodes::BeginOutputAttribute(node.id * 100 + i + node.input_names.size());
+            ImNodes::BeginOutputAttribute(node.id * 100 + i + (int)node.input_names.size());
             ImGui::TextUnformatted(node.output_names[i].c_str());
             ImNodes::EndOutputAttribute();
         }

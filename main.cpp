@@ -2,7 +2,6 @@
 * Remap
 * A memory editor, written in C++ and ImGui.
 */
-
 #include <interface/renderer.hpp>
 
 int main() {
