@@ -124,4 +124,6 @@ inline void ApplyCustomStyle()
     // Font 
     ImGuiIO& io = ImGui::GetIO();
     io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\segoeui.ttf", 18);
+
+    io.IniFilename = nullptr;
 }
