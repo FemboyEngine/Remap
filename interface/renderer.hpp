@@ -22,12 +22,12 @@
 #include <vector>
 #include <string>
 
-#include "views/ProcessesViewer.hpp"
-#include "views/MemoryViewer.hpp"
-#include "views/StringsViewer.hpp"
-#include "views/ModulesViewer.hpp"
+#include "views/Processes.hpp"
+#include "views/Disassembly.hpp"
+#include "views/Strings.hpp"
+#include "views/Modules.hpp"
 #include "views/NodeEditor.hpp"
-#include "views/ScriptingView.hpp"
+#include "views/Scripting.hpp"
 #include "views/TopBar.hpp"
 
 #include "style.h"
@@ -96,11 +96,11 @@ namespace renderer {
 
             ui::views::TopBar();
             ui::views::Processes();
-            ui::views::MemoryViewer();
-            ui::views::StringsViewer();
-            ui::views::ModulesViewer();
+            ui::views::Disassembly();
+            ui::views::Strings();
+            ui::views::Modules();
             ui::views::NodeEditor();
-            ui::views::ScriptingView();
+            ui::views::Scripting();
 
             ImGui::End();
 

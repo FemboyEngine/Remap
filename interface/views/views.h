@@ -14,21 +14,21 @@
 namespace ui::views {
     void TopBar() noexcept;
     void Processes() noexcept;
-    void MemoryViewer() noexcept;
-    void StringsViewer() noexcept;
-    void ModulesViewer() noexcept;
+    void Disassembly() noexcept;
+    void Strings() noexcept;
+    void Modules() noexcept;
 
     void NodeEditor() noexcept;
-    void ScriptingView() noexcept;
+    void Scripting() noexcept;
 }
 
 namespace ui::views::states {
     std::unordered_map<std::string, bool> running = {
 		{ "Processes", false },
-		{ "Memory Viewer", false },
-		{ "Strings Viewer", false },
-		{ "Modules Viewer", false },
+		{ "Disassembly", false },
+		{ "Strings", false },
+		{ "Modules", false },
 		{ "Node Editor", false },
-        { "Scripting View", false }
+        { "Scripting", false }
 	};
 }

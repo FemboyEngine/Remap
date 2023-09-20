@@ -12,6 +12,7 @@ namespace state {
 
     extern std::vector<uint8_t> memory;
     extern std::vector<std::string> modules;
+    extern std::vector<int> aob;
 
     extern bool isRunning;
     extern bool popup;

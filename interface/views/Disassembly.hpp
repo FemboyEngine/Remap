@@ -22,14 +22,14 @@ uint64_t offset = 0;
 
 std::vector<std::tuple<uint64_t, std::string, std::string>> disasmText;
 
-void ui::views::MemoryViewer() noexcept
+void ui::views::Disassembly() noexcept
 {
-    if (!states::running["Memory Viewer"])
+    if (!states::running["Disassembly"])
         return;
 
 	ImGui::Begin(
-        "Memory Viewer",
-        &states::running["Memory Viewer"],
+        "Disassembly",
+        &states::running["Disassembly"],
         ImGuiWindowFlags_NoSavedSettings |
         ImGuiWindowFlags_NoCollapse |
         ImGuiWindowFlags_HorizontalScrollbar

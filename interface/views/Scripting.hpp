@@ -39,14 +39,14 @@ int l_print(lua_State* L) {
     return 0;
 }
 
-void ui::views::ScriptingView() noexcept {
+void ui::views::Scripting() noexcept {
 
-    if (!states::running["Scripting View"])
+    if (!states::running["Scripting"])
 		return;
 
     ImGui::Begin(
-        "Scripting View",
-        &states::running["Scripting View"],
+        "Scripting",
+        &states::running["Scripting"],
         ImGuiWindowFlags_NoSavedSettings |
         ImGuiWindowFlags_NoCollapse |
         ImGuiWindowFlags_HorizontalScrollbar

@@ -13,14 +13,14 @@ LPVOID address = NULL;
 
 std::vector<std::string> strings;
 
-void ui::views::StringsViewer() noexcept {
+void ui::views::Strings() noexcept {
 
-    if (!states::running["Strings Viewer"])
+    if (!states::running["Strings"])
         return;
 
     ImGui::Begin(
-        "Strings Viewer",
-        &states::running["Strings Viewer"],
+        "Strings",
+        &states::running["Strings"],
         ImGuiWindowFlags_NoSavedSettings |
         ImGuiWindowFlags_NoCollapse |
         ImGuiWindowFlags_HorizontalScrollbar

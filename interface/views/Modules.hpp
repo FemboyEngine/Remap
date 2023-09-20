@@ -13,14 +13,14 @@
 
 std::vector<std::string> modules;
 
-void ui::views::ModulesViewer() noexcept
+void ui::views::Modules() noexcept
 {
-	if (!states::running["Modules Viewer"]) 
+	if (!states::running["Modules"]) 
 		return;
 
 	ImGui::Begin(
-		"Modules Viewer",
-		&states::running["Modules Viewer"],
+		"Modules",
+		&states::running["Modules"],
 		ImGuiWindowFlags_NoSavedSettings |
 		ImGuiWindowFlags_NoCollapse |
 		ImGuiWindowFlags_HorizontalScrollbar

@@ -16,6 +16,7 @@
 #include <TlHelp32.h>
 #include <algorithm>
 #include <Psapi.h>
+#include <sstream>
 
 const int MAX_SEARCH_BUFFER_SIZE = 256;
 const int MAX_BUFFER_SIZE = 1024 * 1024 * 10;

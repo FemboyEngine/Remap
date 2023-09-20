@@ -6,6 +6,7 @@ uint16_t state::pid = 0;
 
 std::vector<uint8_t> state::memory;
 std::vector<std::string> state::modules;
+std::vector<int> aob;
 
 bool state::isRunning = true;
 bool state::popup = true;
