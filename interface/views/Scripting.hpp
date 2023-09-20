@@ -39,7 +39,7 @@ int l_print(lua_State* L) {
     return 0;
 }
 
-void ui::views::Scripting() noexcept {
+void ui::views::Scripting() {
 
     if (!states::running["Scripting"])
 		return;

@@ -2,15 +2,6 @@
 
 #include <imgui/imgui.h>
 
-inline ImVec4 HexToImVec4(int hex, float alpha = 1.0f)
-{
-    float r = ((hex >> 16) & 0xFF) / 255.0f;
-    float g = ((hex >> 8) & 0xFF) / 255.0f;
-    float b = (hex & 0xFF) / 255.0f;
-
-    return ImVec4(r, g, b, alpha);
-}
-
 inline void LoadStyle()
 {
     OPENFILENAME ofn;
@@ -29,11 +20,14 @@ inline void LoadStyle()
     ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 
     if (GetOpenFileName(&ofn)) {
-		std::wstring ws(szFile);
-		std::string filename(ws.begin(), ws.end());
-		imjson::load_theme_from_file(filename.c_str());
-		std::cout << "Loaded theme from " << filename << std::endl;
-	}
+        std::wstring ws(szFile);
+        #pragma warning(push)
+        #pragma warning(disable: 4244) // conversion data loss
+        std::string filename(ws.begin(), ws.end());
+        #pragma warning(pop)
+        imjson::load_theme_from_file(filename.c_str());
+        std::cout << "Loaded theme from " << filename << std::endl;
+    }
 }
 
 inline void ApplyCustomStyle()
@@ -51,12 +45,12 @@ inline void ApplyCustomStyle()
     colors[ImGuiCol_TextDisabled] = ImVec4{ 0.5f, 0.5f, 0.5f, 1.0f };
 
     // Headers
-    colors[ImGuiCol_Header] = ImVec4{ 0.13f, 0.13f, 0.17, 1.0f };
+    colors[ImGuiCol_Header] = ImVec4{ 0.13f, 0.13f, 0.17f, 1.0f };
     colors[ImGuiCol_HeaderHovered] = ImVec4{ 0.19f, 0.2f, 0.25f, 1.0f };
     colors[ImGuiCol_HeaderActive] = ImVec4{ 0.16f, 0.16f, 0.21f, 1.0f };
 
     // Buttons
-    colors[ImGuiCol_Button] = ImVec4{ 0.13f, 0.13f, 0.17, 1.0f };
+    colors[ImGuiCol_Button] = ImVec4{ 0.13f, 0.13f, 0.17f, 1.0f };
     colors[ImGuiCol_ButtonHovered] = ImVec4{ 0.19f, 0.2f, 0.25f, 1.0f };
     colors[ImGuiCol_ButtonActive] = ImVec4{ 0.16f, 0.16f, 0.21f, 1.0f };
     colors[ImGuiCol_CheckMark] = ImVec4{ 0.74f, 0.58f, 0.98f, 1.0f };
@@ -69,13 +63,13 @@ inline void ApplyCustomStyle()
     colors[ImGuiCol_SliderGrabActive] = ImVec4{ 0.74f, 0.58f, 0.98f, 0.54f };
 
     // Frame BG
-    colors[ImGuiCol_FrameBg] = ImVec4{ 0.13f, 0.13, 0.17, 1.0f };
+    colors[ImGuiCol_FrameBg] = ImVec4{ 0.13f, 0.13f, 0.17f, 1.0f };
     colors[ImGuiCol_FrameBgHovered] = ImVec4{ 0.19f, 0.2f, 0.25f, 1.0f };
     colors[ImGuiCol_FrameBgActive] = ImVec4{ 0.16f, 0.16f, 0.21f, 1.0f };
 
     // Tabs
     colors[ImGuiCol_Tab] = ImVec4{ 0.16f, 0.16f, 0.21f, 1.0f };
-    colors[ImGuiCol_TabHovered] = ImVec4{ 0.24, 0.24f, 0.32f, 1.0f };
+    colors[ImGuiCol_TabHovered] = ImVec4{ 0.24f, 0.24f, 0.32f, 1.0f };
     colors[ImGuiCol_TabActive] = ImVec4{ 0.2f, 0.22f, 0.27f, 1.0f };
     colors[ImGuiCol_TabUnfocused] = ImVec4{ 0.16f, 0.16f, 0.21f, 1.0f };
     colors[ImGuiCol_TabUnfocusedActive] = ImVec4{ 0.16f, 0.16f, 0.21f, 1.0f };

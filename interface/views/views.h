@@ -12,14 +12,14 @@
 #include <unordered_map>
 
 namespace ui::views {
-    void TopBar() noexcept;
-    void Processes() noexcept;
-    void Disassembly() noexcept;
-    void Strings() noexcept;
-    void Modules() noexcept;
+    void TopBar();
+    void Processes();
+    void Disassembly();
+    void Strings();
+    void Modules();
 
-    void NodeEditor() noexcept;
-    void Scripting() noexcept;
+    void NodeEditor();
+    void Scripting();
 }
 
 namespace ui::views::states {

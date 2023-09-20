@@ -18,8 +18,7 @@ std::string selected{};
 
 std::vector<std::string> processes = GetProcessesNames();
 
-void ui::views::Processes() noexcept
-{
+void ui::views::Processes() {
 	if (!states::running["Processes"])
 		return;
 

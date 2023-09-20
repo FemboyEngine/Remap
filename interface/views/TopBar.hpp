@@ -4,8 +4,7 @@
 #include <imjson/imjson.h>
 #include <interface/style.h>
 
-void ui::views::TopBar() noexcept
-{
+void ui::views::TopBar() {
     ImGui::BeginMainMenuBar();
 
     if (ImGui::BeginMenu("File"))

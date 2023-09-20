@@ -22,8 +22,7 @@ uint64_t offset = 0;
 
 std::vector<std::tuple<uint64_t, std::string, std::string>> disasmText;
 
-void ui::views::Disassembly() noexcept
-{
+void ui::views::Disassembly() {
     if (!states::running["Disassembly"])
         return;
 
@@ -90,7 +89,7 @@ void ui::views::Disassembly() noexcept
         ImGui::Separator();
 
         ImGuiListClipper clipper;
-        clipper.Begin(disasmText.size());
+        clipper.Begin((int)disasmText.size());
         while (clipper.Step()) {
             for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
             {

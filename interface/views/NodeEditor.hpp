@@ -27,7 +27,7 @@ int NewNodeOutputs = 1;
 std::vector<char*> NewNodeINames;
 std::vector<char*> NewNodeONames;
 
-void ui::views::NodeEditor() noexcept {
+void ui::views::NodeEditor() {
     
     if (!states::running["Node Editor"])
         return;

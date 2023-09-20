@@ -13,7 +13,7 @@ LPVOID address = NULL;
 
 std::vector<std::string> strings;
 
-void ui::views::Strings() noexcept {
+void ui::views::Strings() {
 
     if (!states::running["Strings"])
         return;
@@ -53,7 +53,7 @@ void ui::views::Strings() noexcept {
 
     if (state::mapped_strings) {
         ImGuiListClipper clipper;
-        clipper.Begin(strings.size());
+        clipper.Begin((int)strings.size());
 
         while (clipper.Step()) {
             for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; i++) {

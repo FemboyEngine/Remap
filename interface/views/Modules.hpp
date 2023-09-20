@@ -13,8 +13,7 @@
 
 std::vector<std::string> modules;
 
-void ui::views::Modules() noexcept
-{
+void ui::views::Modules() {
 	if (!states::running["Modules"]) 
 		return;
 
