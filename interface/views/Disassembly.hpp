@@ -32,7 +32,8 @@ void ui::views::Disassembly() noexcept
         &states::running["Disassembly"],
         ImGuiWindowFlags_NoSavedSettings |
         ImGuiWindowFlags_NoCollapse |
-        ImGuiWindowFlags_HorizontalScrollbar
+        ImGuiWindowFlags_HorizontalScrollbar |
+        ImGuiWindowFlags_NoSavedSettings
     );
 
 	if (state::CurrentProcess == NULL && state::pid == 0) return;

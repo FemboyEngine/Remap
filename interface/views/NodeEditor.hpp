@@ -36,7 +36,8 @@ void ui::views::NodeEditor() noexcept {
 		"Node Editor",
 		&states::running["Node Editor"],
 		ImGuiWindowFlags_NoCollapse |
-		ImGuiWindowFlags_HorizontalScrollbar
+		ImGuiWindowFlags_HorizontalScrollbar |
+        ImGuiWindowFlags_NoSavedSettings
 	);
 
     ImNodes::BeginNodeEditor();

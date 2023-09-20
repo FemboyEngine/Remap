@@ -49,7 +49,8 @@ void ui::views::Scripting() noexcept {
         &states::running["Scripting"],
         ImGuiWindowFlags_NoSavedSettings |
         ImGuiWindowFlags_NoCollapse |
-        ImGuiWindowFlags_HorizontalScrollbar
+        ImGuiWindowFlags_HorizontalScrollbar |
+        ImGuiWindowFlags_NoSavedSettings
     );
 
     lua_State* L = luaL_newstate();

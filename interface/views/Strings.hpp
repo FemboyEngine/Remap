@@ -23,7 +23,8 @@ void ui::views::Strings() noexcept {
         &states::running["Strings"],
         ImGuiWindowFlags_NoSavedSettings |
         ImGuiWindowFlags_NoCollapse |
-        ImGuiWindowFlags_HorizontalScrollbar
+        ImGuiWindowFlags_HorizontalScrollbar |
+        ImGuiWindowFlags_NoSavedSettings
     );
 
     if (state::CurrentProcess == NULL && state::pid == 0) return;

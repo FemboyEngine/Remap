@@ -28,7 +28,8 @@ void ui::views::Processes() noexcept
 		&states::running["Processes"],
 		ImGuiWindowFlags_NoSavedSettings |
 		ImGuiWindowFlags_NoCollapse |
-		ImGuiWindowFlags_HorizontalScrollbar
+		ImGuiWindowFlags_HorizontalScrollbar |
+		ImGuiWindowFlags_NoSavedSettings
 	);
 
 	// center text
@@ -88,7 +89,8 @@ void ui::views::Processes() noexcept
 	{
 		ImGui::OpenPopup("Success");
 
-		if (ImGui::BeginPopupModal("Success", &state::popup, ImGuiWindowFlags_AlwaysAutoResize))
+		if (ImGui::BeginPopupModal("Success", &state::popup, 
+			ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings))
 		{
 			ImGui::Text("Successfully opened process %s with pid %d", selected.c_str(), state::pid);
 		}
