@@ -1,20 +1,18 @@
-#pragma once
-
 #include <Windows.h>
 #include <cstdint>
 #include <vector>
 #include <string>
 
 namespace state {
-    extern HANDLE CurrentProcess;
-    extern LPCVOID BaseAddress;
-    extern uint16_t pid;
+    HANDLE CurrentProcess = NULL;
+    LPCVOID BaseAddress = nullptr;
+    uint16_t pid = 0;
 
-    extern std::vector<uint8_t> memory;
-    extern std::vector<std::string> modules;
+    std::vector<uint8_t> memory;
+    std::vector<std::string> modules;
 
-    extern bool isRunning;
-    extern bool popup;
-    extern bool disassembled;
-    extern bool mapped_strings;
+    bool isRunning = true;
+    bool popup = true;
+    bool disassembled = false;
+    bool mapped_strings = false;
 }

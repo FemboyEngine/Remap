@@ -132,7 +132,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="core\state.cpp" />
     <ClCompile Include="dependencies\imgui\imgui.cpp" />
     <ClCompile Include="dependencies\imgui\imgui_demo.cpp" />
     <ClCompile Include="dependencies\imgui\imgui_draw.cpp" />
@@ -145,7 +144,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="core\memory.hpp" />
+    <ClInclude Include="core\memory.h" />
     <ClInclude Include="core\state.h" />
     <ClInclude Include="dependencies\GLFW\include\GLFW\glfw3.h" />
     <ClInclude Include="dependencies\GLFW\include\GLFW\glfw3native.h" />
@@ -218,15 +217,15 @@
     <ClInclude Include="dependencies\Zydis\Status.h" />
     <ClInclude Include="dependencies\Zydis\Utils.h" />
     <ClInclude Include="dependencies\zydis\Zydis.h" />
-    <ClInclude Include="interface\renderer.hpp" />
+    <ClInclude Include="interface\renderer.h" />
     <ClInclude Include="interface\style.h" />
-    <ClInclude Include="interface\views\Modules.hpp" />
-    <ClInclude Include="interface\views\NodeEditor.hpp" />
-    <ClInclude Include="interface\views\Scripting.hpp" />
-    <ClInclude Include="interface\views\Strings.hpp" />
-    <ClInclude Include="interface\views\TopBar.hpp" />
-    <ClInclude Include="interface\views\Disassembly.hpp" />
-    <ClInclude Include="interface\views\Processes.hpp" />
+    <ClInclude Include="interface\views\Modules.h" />
+    <ClInclude Include="interface\views\NodeEditor.h" />
+    <ClInclude Include="interface\views\Scripting.h" />
+    <ClInclude Include="interface\views\Strings.h" />
+    <ClInclude Include="interface\views\TopBar.h" />
+    <ClInclude Include="interface\views\Disassembly.h" />
+    <ClInclude Include="interface\views\Processes.h" />
     <ClInclude Include="interface\views\views.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

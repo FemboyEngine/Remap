@@ -1,5 +1,4 @@
-#ifndef TOPBAR_HPP
-#define TOPBAR_HPP
+#pragma once
 
 #include <imjson/imjson.h>
 #include <interface/style.h>
@@ -49,5 +48,3 @@ void ui::views::TopBar() {
 	#pragma warning(pop)
     ImGui::EndMainMenuBar();
 }
-
-#endif // TOPBAR_HPP

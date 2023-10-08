@@ -39,9 +39,6 @@
     <ClCompile Include="dependencies\imgui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\state.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="dependencies\imnodes\imnodes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -83,10 +80,10 @@
     <ClInclude Include="dependencies\imgui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="interface\renderer.hpp">
+    <ClInclude Include="interface\renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="interface\views\Processes.hpp">
+    <ClInclude Include="interface\views\Processes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="interface\views\views.h">
@@ -95,7 +92,7 @@
     <ClInclude Include="core\state.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\memory.hpp">
+    <ClInclude Include="core\memory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="interface\style.h">
@@ -251,16 +248,16 @@
     <ClInclude Include="dependencies\Zycore\Internal\AtomicMSVC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="interface\views\Disassembly.hpp">
+    <ClInclude Include="interface\views\Disassembly.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="interface\views\TopBar.hpp">
+    <ClInclude Include="interface\views\TopBar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="interface\views\Strings.hpp">
+    <ClInclude Include="interface\views\Strings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="interface\views\Modules.hpp">
+    <ClInclude Include="interface\views\Modules.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dependencies\imgui\stb_image.h">
@@ -272,7 +269,7 @@
     <ClInclude Include="dependencies\imnodes\imnodes_internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="interface\views\NodeEditor.hpp">
+    <ClInclude Include="interface\views\NodeEditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dependencies\imjson\imjson.h">
@@ -281,7 +278,7 @@
     <ClInclude Include="dependencies\nlohmann\json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="interface\views\Scripting.hpp">
+    <ClInclude Include="interface\views\Scripting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dependencies\lua\include\lauxlib.h">

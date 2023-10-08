@@ -3,7 +3,7 @@
 * A memory editor, written in C++ and ImGui.
 *
 * This file is part of Remap.
-* - views/NodeEditor.hpp
+* - views/NodeEditor.h
 *
 * Code for the node editor.
 */

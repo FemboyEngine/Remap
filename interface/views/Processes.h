@@ -3,13 +3,13 @@
 * A memory editor, written in C++ and ImGui.
 *
 * This file is part of Remap.
-* - views/processes.hpp
+* - views/Processes.h
 *
 * Code for processes window.
 */
 
 #include "views.h"
-#include <core/memory.hpp>
+#include <core/memory.h>
 #include <core/state.h>
 #include <iostream>
 

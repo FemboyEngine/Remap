@@ -3,7 +3,7 @@
 * A memory editor, written in C++ and ImGui.
 *
 * This file is part of Remap.
-* - views/ScriptingView.hpp
+* - views/Scripting.h
 *
 * Code for the lua scripting view.
 */

@@ -8,12 +8,9 @@
 * Code for rendering the interface.
 */
 
-#ifndef RENDERER_HPP
-#define RENDERER_HPP
+#pragma once
 
 #define _CRT_SECURE_NO_WARNINGS
-
-#include <Windows.h>
 
 #include <GLFW/glfw3.h>
 #include <imgui/imgui.h>
@@ -22,13 +19,13 @@
 #include <string>
 #include <vector>
 
-#include "views/Processes.hpp"
-#include "views/Disassembly.hpp"
-#include "views/Strings.hpp"
-#include "views/Modules.hpp"
-#include "views/NodeEditor.hpp"
-#include "views/Scripting.hpp"
-#include "views/TopBar.hpp"
+#include "views/Processes.h"
+#include "views/Disassembly.h"
+#include "views/Strings.h"
+#include "views/Modules.h"
+#include "views/NodeEditor.h"
+#include "views/Scripting.h"
+#include "views/TopBar.h"
 
 #include "style.h"
 
@@ -99,5 +96,3 @@ namespace renderer {
     }
 
 }
-
-#endif // RENDERER_HPP

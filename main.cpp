@@ -2,7 +2,8 @@
 * Remap
 * A memory editor, written in C++ and ImGui.
 */
-#include "interface/renderer.hpp"
+
+#include "interface/renderer.h"
 
 int main() {
     GLFWwindow* window;

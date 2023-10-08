@@ -3,7 +3,7 @@
 * A memory editor, written in C++ and ImGui.
 *
 * This file is part of Remap.
-* - views/MemoryViewer.hpp
+* - views/Disassembly.h
 *
 * Code for memory viewer window.
 */

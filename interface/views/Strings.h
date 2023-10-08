@@ -3,7 +3,7 @@
 * A memory editor, written in C++ and ImGui.
 *
 * This file is part of Remap.
-* - views/processes.hpp
+* - views/Strings.h
 *
 * Code for strings viewer window
 */

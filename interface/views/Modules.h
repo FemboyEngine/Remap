@@ -3,7 +3,7 @@
 * A memory editor, written in C++ and ImGui.
 *
 * This file is part of Remap.
-* - views/ModulesViewer.hpp
+* - views/Modules.h
 *
 * Code for loaded modules viewer window.
 */
