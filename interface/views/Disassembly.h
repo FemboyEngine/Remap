@@ -69,7 +69,7 @@ void ui::views::Disassembly() {
                 std::string bytes = ss.str();
                 
                 // | address | bytes | disassembly |
-                disasmText.push_back(std::make_tuple(runtime_address + offset + i, buffer, bytes));
+                disasmText.emplace_back(runtime_address + offset + i, buffer, bytes);
             }
             i += instruction.length;
 
