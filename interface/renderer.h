@@ -34,7 +34,7 @@ int WINDOW_HEIGHT = 720;
 
 namespace renderer {
 
-    void Init(GLFWwindow*& window) {
+    void Initialize(GLFWwindow*& window) {
         glfwInit();
         window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Remap", NULL, NULL);
         glfwMakeContextCurrent(window);
@@ -49,7 +49,7 @@ namespace renderer {
         glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
     }
 
-    void loop(GLFWwindow* window) {
+    void Render(GLFWwindow* window) {
         while (!glfwWindowShouldClose(window)) {
             glfwPollEvents();
 
@@ -88,7 +88,7 @@ namespace renderer {
         }
     }
 
-    void clean(GLFWwindow* window) {
+    void Terminate(GLFWwindow* window) {
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();

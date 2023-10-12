@@ -8,9 +8,9 @@
 int main() {
     GLFWwindow* window;
 
-    renderer::Init(window);
-    renderer::loop(window);
-    renderer::clean(window);
+    renderer::Initialize(window);
+    renderer::Render(window);
+    renderer::Terminate(window);
 
     return 0;
 }
