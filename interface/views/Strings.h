@@ -39,10 +39,9 @@ void ui::views::Strings() {
             if (isprint(*it)) {
                 str.push_back(*it);
             }
-            else {
-                if (!str.empty()) {
-                    strings.emplace_back(std::move(str));
-                }
+            else if (!str.empty()) {
+                strings.emplace_back(std::move(str));
+                str.clear();
             }
         }
         if (!str.empty()) {
@@ -53,7 +52,7 @@ void ui::views::Strings() {
 
     if (state::mapped_strings) {
         ImGuiListClipper clipper;
-        clipper.Begin((int)strings.size());
+        clipper.Begin(static_cast<int>(strings.size()));
 
         while (clipper.Step()) {
             for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; i++) {
