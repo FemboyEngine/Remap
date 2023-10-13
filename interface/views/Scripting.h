@@ -107,47 +107,65 @@ void ui::views::Scripting() {
     lua_setglobal(L, "GetLoadedModules");
 
     lua_pushcfunction(L, [](lua_State* L) -> int {
-
-        uintptr_t address = lua_tointeger(L, 1);
-
-        int pid = lua_tointeger(L, 2);
-        int size = lua_tointeger(L, 3);
-
-        HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
-
-        if (hProcess == INVALID_HANDLE_VALUE) {
-            lua_pushinteger(L, 0);
-            return 1;
-        }
-
-        void* buffer = malloc(size);
+        DWORD pid = lua_tointeger(L, 1);
+        uintptr_t address = lua_tointeger(L, 2);
+        size_t size = lua_tointeger(L, 3);
+        char* buffer = new char[size];
         SIZE_T bytesRead;
-
-        ReadProcessMemory(hProcess, (LPCVOID)address, buffer, size, &bytesRead);
-
-        lua_pushinteger(L, (uintptr_t)buffer);
-        lua_pushinteger(L, bytesRead);
-
-        return 2;
+        HANDLE processHandle = OpenProcess(PROCESS_VM_READ, FALSE, pid);
+        if (processHandle != NULL) {
+            if (ReadProcessMemory(processHandle, (LPCVOID)address, buffer, size, &bytesRead)) {
+                lua_pushlstring(L, buffer, bytesRead);
+            }
+            else {
+                DWORD error = GetLastError();
+                std::stringstream ss;
+                ss << "Failed to read memory. Error code: " << error;
+                lua_pushstring(L, ss.str().c_str());
+            }
+            CloseHandle(processHandle);
+        }
+        else {
+            DWORD error = GetLastError();
+            std::stringstream ss;
+            ss << "Failed to open process. Error code: " << error;
+            lua_pushstring(L, ss.str().c_str());
+        }
+        delete[] buffer;
+        return 1;
     });
-    lua_setglobal(L, "rpm");
+    lua_setglobal(L, "read");
 
     lua_pushcfunction(L, [](lua_State* L) -> int {
-		uintptr_t address = lua_tointeger(L, 1);
-		int pid = lua_tointeger(L, 2);
-		int size = lua_tointeger(L, 3);
-		void* buffer = (void*)lua_tointeger(L, 4);
-		HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
-        if (hProcess == INVALID_HANDLE_VALUE) {
-			lua_pushinteger(L, 0);
-			return 1;
-		}
-		SIZE_T bytesWritten;
-		WriteProcessMemory(hProcess, (LPVOID)address, buffer, size, &bytesWritten);
-		lua_pushinteger(L, bytesWritten);
-		return 1;
+        DWORD pid = lua_tointeger(L, 1);
+        uintptr_t address = lua_tointeger(L, 2);
+        size_t size = strlen(lua_tostring(L, 3));
+        char* buffer = new char[size];
+        memcpy(buffer, lua_tostring(L, 3), size);
+        SIZE_T bytesWritten;
+        HANDLE processHandle = OpenProcess(PROCESS_VM_WRITE | PROCESS_VM_OPERATION, FALSE, pid);
+        if (processHandle != NULL) {
+            if (WriteProcessMemory(processHandle, (LPVOID)address, buffer, size, &bytesWritten)) {
+                lua_pushboolean(L, true);
+            }
+            else {
+                DWORD error = GetLastError();
+                std::stringstream ss;
+                ss << "Failed to write memory. Error code: " << error;
+                lua_pushstring(L, ss.str().c_str());
+            }
+            CloseHandle(processHandle);
+        }
+        else {
+            DWORD error = GetLastError();
+            std::stringstream ss;
+            ss << "Failed to open process. Error code: " << error;
+            lua_pushstring(L, ss.str().c_str());
+        }
+        delete[] buffer;
+        return 1;
 	});
-    lua_setglobal(L, "wpm");
+    lua_setglobal(L, "write");
 
     lua_pushcfunction(L, [](lua_State* L) -> int {
         int number = lua_tointeger(L, 1);
@@ -158,8 +176,9 @@ void ui::views::Scripting() {
         });
     lua_setglobal(L, "ToHex");
 
-    ImGui::InputText("##input", l_buffer, IM_ARRAYSIZE(l_buffer));
-    ImGui::SameLine();
+    ImGui::InputTextMultiline("##input", l_buffer, IM_ARRAYSIZE(l_buffer),
+        ImVec2(ImGui::GetContentRegionAvail().x, 0));
+
     if (ImGui::Button("Load")) {
         int status = luaL_dostring(L, l_buffer);
 
