@@ -29,24 +29,25 @@ void ui::views::Strings() {
 
     if (state::CurrentProcess == NULL && state::pid == 0) return;
 
-    if (state::mapped_strings == false) {
+    if (!state::mapped_strings) {
         strings.clear();
 
-        std::string str;
-        str.reserve(state::memory.size());
-        strings.reserve(state::memory.size() / 10);
-        for (auto it = state::memory.begin(); it != state::memory.end(); ++it) {
-            if (isprint(*it)) {
-                str.push_back(*it);
+        std::stringstream ss;
+        for (const auto& ch : state::memory) {
+            if (ch == '\n') {
+                if (!ss.str().empty()) {
+                    strings.push_back(ss.str());
+                    ss.str(std::string());
+                }
             }
-            else if (!str.empty()) {
-                strings.emplace_back(std::move(str));
-                str.clear();
+            else if (isprint(ch)) {
+                ss << ch;
             }
         }
-        if (!str.empty()) {
-            strings.emplace_back(std::move(str));
+        if (!ss.str().empty()) {
+            strings.push_back(ss.str());
         }
+
         state::mapped_strings = true;
     }
 
