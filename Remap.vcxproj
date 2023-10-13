@@ -228,6 +228,9 @@
     <ClInclude Include="interface\views\Processes.h" />
     <ClInclude Include="interface\views\views.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="LICENSE" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
