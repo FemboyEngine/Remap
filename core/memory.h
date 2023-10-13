@@ -1,11 +1,6 @@
 /*
-* Remap
-* A memory editor, written in C++ and ImGui.
-*
-* This file is part of Remap.
-* - core/memory.hpp
-*
-* Code for memory editing.
+* Code for memory helpers.
+* - core/memory.h
 */
 
 #ifndef MEMORY_HPP

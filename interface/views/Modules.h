@@ -1,11 +1,6 @@
 /*
-* Remap
-* A memory editor, written in C++ and ImGui.
-*
-* This file is part of Remap.
-* - views/Modules.h
-*
 * Code for loaded modules viewer window.
+* - views/Modules.h
 */
 
 #include <vector>

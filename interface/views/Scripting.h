@@ -1,11 +1,6 @@
 /*
-* Remap
-* A memory editor, written in C++ and ImGui.
-*
-* This file is part of Remap.
+* Code for the lua scripting view
 * - views/Scripting.h
-*
-* Code for the lua scripting view.
 */
 
 extern "C" {

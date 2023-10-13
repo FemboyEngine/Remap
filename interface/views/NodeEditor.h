@@ -1,14 +1,12 @@
 /*
-* Remap
-* A memory editor, written in C++ and ImGui.
-*
-* This file is part of Remap.
-* - views/NodeEditor.h
-*
 * Code for the node editor.
+* - views/NodeEditor.h
 */
 
 #include <imnodes/imnodes.h>
+
+// TODO: Implement a Proximity-View-Like interface.
+// UNUSED
 
 struct Node {
     int id;

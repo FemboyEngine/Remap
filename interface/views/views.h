@@ -1,11 +1,6 @@
 /*
-* Remap
-* A memory editor, written in C++ and ImGui.
-*
-* This file is part of Remap.
-* - views/views.h
-*
 * Header file for views namespace.
+* - views/views.h
 */
 
 #pragma once

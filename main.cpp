@@ -1,6 +1,6 @@
 /*
 * Remap
-* A memory editor, written in C++ and ImGui.
+* A Memory alteration utility.
 */
 
 #include "interface/renderer.h"

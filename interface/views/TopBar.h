@@ -1,3 +1,8 @@
+/*
+* Code for the top bar
+* - views/TopBar.h
+*/
+
 #pragma once
 
 #include <imjson/imjson.h>

@@ -1,11 +1,6 @@
 /*
-* Remap
-* A memory editor, written in C++ and ImGui.
-*
-* This file is part of Remap.
+* Code for disassembly window.
 * - views/Disassembly.h
-*
-* Code for memory viewer window.
 */
 
 #include <Zydis/Zydis.h>

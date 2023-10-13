@@ -1,3 +1,8 @@
+/*
+* Code for the interface style
+* - interface/style.h
+*/
+
 #pragma once
 
 #include <imgui/imgui.h>

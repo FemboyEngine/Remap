@@ -1,11 +1,6 @@
 /*
-* Remap
-* A memory editor, written in C++ and ImGui.
-*
-* This file is part of Remap.
-* - views/Processes.h
-*
 * Code for processes window.
+* - views/Processes.h
 */
 
 #include "views.h"

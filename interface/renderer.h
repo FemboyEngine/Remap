@@ -1,11 +1,6 @@
 /*
-* Remap
-* A memory editor, written in C++ and ImGui.
-*
-* This file is part of Remap.
-* - renderer.hpp
-* 
 * Code for rendering the interface.
+* - interface/renderer.hpp
 */
 
 #pragma once

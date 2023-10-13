@@ -1,3 +1,8 @@
+/*
+* Code for global variables.
+* - core/state.h
+*/
+
 #include <Windows.h>
 #include <cstdint>
 #include <vector>
