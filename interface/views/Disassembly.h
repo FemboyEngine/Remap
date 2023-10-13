@@ -37,15 +37,14 @@ void ui::views::Disassembly() {
 
 	if (state::CurrentProcess == NULL && state::pid == 0) return;
 
+    // TODO: Run disassembly in a thread
     if (state::disassembled == false) {
-
         ZydisDecoder decoder;
         ZydisDecoderInit(&decoder, ZYDIS_MACHINE_MODE_LONG_64, ZYDIS_STACK_WIDTH_64);
 
         ZydisFormatter formatter;
         ZydisFormatterInit(&formatter, ZYDIS_FORMATTER_STYLE_INTEL);
 
-        // clear the disassembly text to prevent duplicates
         disasmText.clear();
 
         int i = 0;

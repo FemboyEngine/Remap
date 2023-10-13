@@ -62,19 +62,19 @@ void ui::views::Processes() {
             state::BaseAddress = (LPCVOID)remap::GetProcessBaseAddress(state::pid);
 
             MEMORY_BASIC_INFORMATION mbi;
-            std::vector<uint8_t> buffer;
+            std::vector<uint8_t> buffer = {};
             buffer.reserve(1024 * 1024 * 100); // reserve 100 MB upfront
             char* p = 0;
-            constexpr size_t bufferSize = 1024 * 1024 * 10; // 10 MB
-            std::vector<uint8_t> tempBuffer(bufferSize);
+            constexpr size_t bufferSize = 1024 * 1024 * 10;
 
             while (VirtualQueryEx(state::CurrentProcess, p, &mbi, sizeof(mbi))) {
                 if (mbi.State == MEM_COMMIT && (mbi.Protect & PAGE_GUARD) == 0 && mbi.Protect != PAGE_NOACCESS) {
                     for (size_t offset = 0; offset < mbi.RegionSize; offset += bufferSize) {
                         size_t bytesToRead = (std::min)(bufferSize, mbi.RegionSize - offset);
                         SIZE_T bytesRead;
-                        if (ReadProcessMemory(state::CurrentProcess, p + offset, tempBuffer.data(), bytesToRead, &bytesRead)) {
-                            buffer.insert(buffer.end(), tempBuffer.begin(), tempBuffer.begin() + bytesRead);
+                        buffer.resize(bytesToRead);
+                        if (ReadProcessMemory(state::CurrentProcess, p + offset, buffer.data(), bytesToRead, &bytesRead)) {
+                            buffer.insert(buffer.end(), buffer.begin(), buffer.begin() + bytesRead);
                         }
                     }
                 }
@@ -87,7 +87,6 @@ void ui::views::Processes() {
             state::disassembled = false;
             state::mapped_strings = false;
         }
-
     }
 
 	ImGui::EndChild();
