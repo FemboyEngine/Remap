@@ -109,7 +109,7 @@ protected:
     }
 
 private:
-    static const int kMaxBufferSize = 1024;
+    static const int kMaxBufferSize = 1024 * 1024 * 15;
     char buffer[kMaxBufferSize];
     SIZE_T size = sizeof(buffer);
     uint64_t runtime_address = 0;

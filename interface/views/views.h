@@ -20,8 +20,8 @@ namespace ui::views::states {
 
 class View {
 public:
-    View(const std::string& title, bool* flag = nullptr)
-        : title(title), e_flag(flag) {}
+    View(const std::string& title, bool window = true /* Create Window? */, bool* flag = nullptr)
+        : title(title), e_flag(flag), window(window) {}
 
     virtual ~View() {}
 
@@ -30,14 +30,15 @@ public:
         if (!*flag)
             return;
 
-        ImGui::Begin(
-            title.c_str(),
-            flag,
-            ImGuiWindowFlags_NoSavedSettings |
-            ImGuiWindowFlags_NoCollapse |
-            ImGuiWindowFlags_HorizontalScrollbar |
-            ImGuiWindowFlags_NoSavedSettings
-        );
+        if (window) {
+            ImGui::Begin(
+                title.c_str(),
+                flag,
+                ImGuiWindowFlags_NoSavedSettings |
+                ImGuiWindowFlags_NoCollapse |
+                ImGuiWindowFlags_HorizontalScrollbar
+            );
+        }
 
         Content();
 
@@ -49,5 +50,6 @@ protected:
 
 private:
     std::string title;
+    bool window;
     bool* e_flag;
 };

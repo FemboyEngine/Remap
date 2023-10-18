@@ -10,7 +10,7 @@
 
 class TopBar : public View {
 public:
-	TopBar() : View("Top Bar", &state::running) {}
+	TopBar() : View("Top Bar", false, &state::running) {}
 
 protected:
 	void Content() override {
