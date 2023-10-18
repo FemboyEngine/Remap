@@ -22,7 +22,7 @@ void ui::views::Strings() {
         ImGuiWindowFlags_NoSavedSettings
     );
 
-    if (state::CurrentProcess == NULL && state::pid == 0) return;
+    if (state::current_process == NULL && state::pid == 0) return;
 
     if (!state::mapped_strings) {
         strings.clear();

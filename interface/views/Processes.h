@@ -53,8 +53,8 @@ void ui::views::Processes() {
         {
             selected = process;
             state::pid = remap::GetProcessIdByName(selected.c_str());
-            state::CurrentProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, state::pid);
-            state::BaseAddress = (LPCVOID)remap::GetProcessBaseAddress(state::pid);
+            state::current_process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, state::pid);
+            state::base_address = (LPCVOID)remap::GetProcessBaseAddress(state::pid);
 
             MEMORY_BASIC_INFORMATION mbi;
             std::vector<uint8_t> buffer = {};
@@ -62,13 +62,13 @@ void ui::views::Processes() {
             char* p = 0;
             constexpr size_t bufferSize = 1024 * 1024 * 10;
 
-            while (VirtualQueryEx(state::CurrentProcess, p, &mbi, sizeof(mbi))) {
+            while (VirtualQueryEx(state::current_process, p, &mbi, sizeof(mbi))) {
                 if (mbi.State == MEM_COMMIT && (mbi.Protect & PAGE_GUARD) == 0 && mbi.Protect != PAGE_NOACCESS) {
                     for (size_t offset = 0; offset < mbi.RegionSize; offset += bufferSize) {
                         size_t bytesToRead = (std::min)(bufferSize, mbi.RegionSize - offset);
                         SIZE_T bytesRead;
                         buffer.resize(bytesToRead);
-                        if (ReadProcessMemory(state::CurrentProcess, p + offset, buffer.data(), bytesToRead, &bytesRead)) {
+                        if (ReadProcessMemory(state::current_process, p + offset, buffer.data(), bytesToRead, &bytesRead)) {
                             buffer.insert(buffer.end(), buffer.begin(), buffer.begin() + bytesRead);
                         }
                     }

@@ -9,9 +9,9 @@
 #include <string>
 
 namespace state {
-    HANDLE CurrentProcess = NULL;
-    LPCVOID BaseAddress = nullptr;
-    uint16_t pid = 0;
+    HANDLE current_process = NULL;
+    LPCVOID base_address = nullptr;
+    uint32_t pid = 0;
 
     std::vector<uint8_t> memory;
     std::vector<std::string> modules;

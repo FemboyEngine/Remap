@@ -31,7 +31,7 @@ void ui::views::Disassembly() {
         ImGuiWindowFlags_NoSavedSettings
     );
 
-	if (state::CurrentProcess == NULL && state::pid == 0) return;
+	if (state::current_process == NULL && state::pid == 0) return;
 
     // TODO: Run disassembly in a thread
     if (state::disassembled == false) {

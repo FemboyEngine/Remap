@@ -20,7 +20,7 @@ void ui::views::Modules() {
 		ImGuiWindowFlags_HorizontalScrollbar |
 		ImGuiWindowFlags_NoSavedSettings
 	);
-	if (state::CurrentProcess == NULL && state::pid == 0) return;
+	if (state::current_process == NULL && state::pid == 0) return;
 
 	modules.clear();
 	modules = remap::GetLoadedModules(state::pid);

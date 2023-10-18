@@ -19,7 +19,7 @@ const int kMaxBufferSize = 1024 * 1024 * 10;
 
 namespace remap {
 
-    std::string GetProcessName(int pid) {
+    std::string GetProcessName(uint32_t pid) {
         HANDLE h_process = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, pid);
         if (h_process == nullptr) {
             return "";
@@ -30,7 +30,7 @@ namespace remap {
             return sz_process_name;
         }
         CloseHandle(h_process);
-        return "";
+        return std::string(); // ""
     }
 
     std::vector<std::string> GetProcessesNames() {
@@ -75,7 +75,7 @@ namespace remap {
         return pid;
     }
 
-    uintptr_t GetProcessBaseAddress(int pid) {
+    uintptr_t GetProcessBaseAddress(uint32_t pid) {
         uintptr_t base_address = 0;
         HANDLE h_process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
         HMODULE h_mods[1024];
@@ -100,7 +100,7 @@ namespace remap {
         return base_address;
     }
 
-    std::vector<std::string> GetLoadedModules(int pid) {
+    std::vector<std::string> GetLoadedModules(uint32_t pid) {
         std::vector<std::string> modules;
         HANDLE h_process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
         HMODULE h_mods[1024];
