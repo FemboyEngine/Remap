@@ -25,6 +25,7 @@ protected:
             ZydisFormatterInit(&formatter, ZYDIS_FORMATTER_STYLE_INTEL);
 
             disasmText.clear();
+            disasmText.reserve(size / 16);
 
             int i = 0;
 
@@ -67,19 +68,18 @@ protected:
 
             ImGuiListClipper clipper;
             clipper.Begin((int)disasmText.size());
+
+            std::string name = remap::GetProcessName(state::pid);
+
             while (clipper.Step()) {
                 for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
                 {
-                    std::string name = remap::GetProcessName(state::pid);
-
                     uint64_t address = std::get<0>(disasmText[i]);
                     std::string disassembly = std::get<1>(disasmText[i]);
                     std::string bytes = std::get<2>(disasmText[i]);
 
                     // address column
-                    std::stringstream ss2;
-                    ss2 << std::uppercase << std::hex << address;
-                    std::string relative = name + "+" + ss2.str();
+                    std::string relative = std::format("{}+{:X}", name, address);
 
                     ImGui::Selectable(relative.c_str(), false, ImGuiSelectableFlags_SpanAllColumns);
                     ImGui::NextColumn();
