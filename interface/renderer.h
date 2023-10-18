@@ -27,11 +27,14 @@ public:
         glfwMakeContextCurrent(window);
     }
 
-    ~Window() {
+    virtual ~Window() {
         glfwTerminate();
     }
 
     GLFWwindow* get() const { return window; }
+
+    Window(const Window&) = delete;
+    Window& operator=(const Window&) = delete;
 
 private:
     GLFWwindow* window;
@@ -58,7 +61,7 @@ public:
         views.push_back(new NodeEditor());
     }
 
-    ~RenderWindow() {
+    virtual ~RenderWindow() {
         for (auto view : views) {
             delete view;
         }
@@ -102,6 +105,9 @@ public:
             glfwSwapBuffers(get());
         }
     }
+
+    RenderWindow(const RenderWindow&) = delete;
+    RenderWindow& operator=(const RenderWindow&) = delete;
 
 private:
     std::vector<View*> views;
