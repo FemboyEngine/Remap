@@ -33,7 +33,6 @@ void ui::views::Disassembly() {
 
 	if (state::current_process == NULL && state::pid == 0) return;
 
-    // TODO: Run disassembly in a thread
     if (state::disassembled == false) {
         ZydisDecoder decoder;
         ZydisDecoderInit(&decoder, ZYDIS_MACHINE_MODE_LONG_64, ZYDIS_STACK_WIDTH_64);
