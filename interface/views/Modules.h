@@ -6,29 +6,25 @@
 #include <vector>
 #include <TlHelp32.h>
 
-std::vector<std::string> modules;
+class ModulesView : public View {
+public:
+	ModulesView() : View("Modules View") {}
 
-void ui::views::Modules() {
-	if (!states::running["Modules"]) 
-		return;
+protected:
+	void Content() override {
+		if (state::current_process == NULL && state::pid == 0) return;
 
-	ImGui::Begin(
-		"Modules",
-		&states::running["Modules"],
-		ImGuiWindowFlags_NoSavedSettings |
-		ImGuiWindowFlags_NoCollapse |
-		ImGuiWindowFlags_HorizontalScrollbar |
-		ImGuiWindowFlags_NoSavedSettings
-	);
-	if (state::current_process == NULL && state::pid == 0) return;
+		modules.clear();
+		modules = remap::GetLoadedModules(state::pid);
 
-	modules.clear();
-	modules = remap::GetLoadedModules(state::pid);
+		for (auto& module : modules)
+		{
+			ImGui::Text("%s", module.c_str());
+		}
 
-	for (auto& module : modules)
-	{
-		ImGui::Text("%s", module.c_str());
+		ImGui::End();
 	}
 
-	ImGui::End();
-}
+private:
+	std::vector<std::string> modules;
+};

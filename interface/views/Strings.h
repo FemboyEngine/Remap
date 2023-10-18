@@ -3,59 +3,50 @@
 * - views/Strings.h
 */
 
-MEMORY_BASIC_INFORMATION memInfo;
-LPVOID address = NULL;
+class StringsView : public View {
+public:
+    StringsView() : View("Strings") {}
 
-std::vector<std::string> strings;
+protected:
+    void Content() override {
+        if (state::current_process == NULL && state::pid == 0) return;
 
-void ui::views::Strings() {
+        if (state::mapped_strings == false) {
+            strings.clear();
 
-    if (!states::running["Strings"])
-        return;
-
-    ImGui::Begin(
-        "Strings",
-        &states::running["Strings"],
-        ImGuiWindowFlags_NoSavedSettings |
-        ImGuiWindowFlags_NoCollapse |
-        ImGuiWindowFlags_HorizontalScrollbar |
-        ImGuiWindowFlags_NoSavedSettings
-    );
-
-    if (state::current_process == NULL && state::pid == 0) return;
-
-    if (!state::mapped_strings) {
-        strings.clear();
-
-        std::stringstream ss;
-        for (const auto& ch : state::memory) {
-            if (ch == '\n') {
-                if (!ss.str().empty()) {
-                    strings.push_back(ss.str());
-                    ss.str(std::string());
+            std::stringstream ss;
+            for (const auto& ch : state::memory) {
+                if (ch == '\n') {
+                    if (!ss.str().empty()) {
+                        strings.push_back(ss.str());
+                        ss.str(std::string());
+                    }
+                }
+                else if (isprint(ch)) {
+                    ss << ch;
                 }
             }
-            else if (isprint(ch)) {
-                ss << ch;
+            if (!ss.str().empty()) {
+                strings.push_back(ss.str());
             }
+
+            state::mapped_strings = true;
         }
-        if (!ss.str().empty()) {
-            strings.push_back(ss.str());
-        }
 
-        state::mapped_strings = true;
-    }
+        if (state::mapped_strings) {
+            ImGuiListClipper clipper;
+            clipper.Begin(static_cast<int>(strings.size()));
 
-    if (state::mapped_strings) {
-        ImGuiListClipper clipper;
-        clipper.Begin(static_cast<int>(strings.size()));
-
-        while (clipper.Step()) {
-            for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; i++) {
-                ImGui::Text("%s", strings[i].c_str());
+            while (clipper.Step()) {
+                for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; i++) {
+                    ImGui::Text("%s", strings[i].c_str());
+                }
             }
         }
     }
 
-    ImGui::End();
-}
+private:
+    MEMORY_BASIC_INFORMATION memInfo;
+    LPVOID address = NULL;
+    std::vector<std::string> strings;
+};

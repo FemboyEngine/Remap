@@ -48,9 +48,21 @@ public:
         ImGui_ImplGlfw_InitForOpenGL(get(), true);
         ImGui_ImplOpenGL3_Init("#version 130");
         glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
+
+        views.push_back(new TopBar());
+        views.push_back(new ProcessesView());
+        views.push_back(new DisassemblyView());
+        views.push_back(new StringsView());
+        views.push_back(new ModulesView());
+        views.push_back(new ScriptingView());
+        views.push_back(new NodeEditor());
     }
 
     ~RenderWindow() {
+        for (auto view : views) {
+            delete view;
+        }
+
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
@@ -78,13 +90,9 @@ public:
                 ImGuiWindowFlags_NoSavedSettings
             );
 
-            ui::views::TopBar();
-            ui::views::Processes();
-            ui::views::Disassembly();
-            ui::views::Strings();
-            ui::views::Modules();
-            ui::views::NodeEditor();
-            ui::views::Scripting();
+            for (auto view : views) {
+                view->Render();
+            }
 
             ImGui::End();
 
@@ -94,35 +102,7 @@ public:
             glfwSwapBuffers(get());
         }
     }
-};
-
-class View {
-public:
-    View(const std::string& title) : title(title) {}
-
-    virtual ~View() {}
-
-    void Render() {
-        if (!ui::views::states::running[title])
-            return;
-
-        ImGui::Begin(
-            title.c_str(),
-            &ui::views::states::running[title],
-            ImGuiWindowFlags_NoSavedSettings |
-            ImGuiWindowFlags_NoCollapse |
-            ImGuiWindowFlags_HorizontalScrollbar |
-            ImGuiWindowFlags_NoSavedSettings
-        );
-
-        Content();
-
-        ImGui::End();
-    }
-
-protected:
-    virtual void Content() = 0;
 
 private:
-    std::string title;
+    std::vector<View*> views;
 };
