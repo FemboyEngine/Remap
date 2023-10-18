@@ -5,7 +5,8 @@
 
 #include <imnodes/imnodes.h>
 
-// TODO: Implement a Proximity-View-Like interface.
+// TODO: Implement a Proximity-View-Like 
+// interface for the disassembly using it.
 // UNUSED
 
 struct Node {

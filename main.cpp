@@ -18,11 +18,8 @@
 #include "interface/renderer.h"
 
 int main() {
-    GLFWwindow* window;
-
-    renderer::Initialize(window);
-    renderer::Render(window);
-    renderer::Terminate(window);
+    RenderWindow window(1280, 720, "Remap");
+    window.Render();
 
     return 0;
 }

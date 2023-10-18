@@ -1,8 +1,3 @@
-/*
-* Code for rendering the interface.
-* - interface/renderer.hpp
-*/
-
 #pragma once
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -24,28 +19,45 @@
 
 #include "style.h"
 
-int WINDOW_WIDTH = 1280;
-int WINDOW_HEIGHT = 720;
-
-namespace renderer {
-
-    void Initialize(GLFWwindow*& window) {
+class Window {
+public:
+    Window(int width, int height, const std::string& title) {
         glfwInit();
-        window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Remap", NULL, NULL);
+        window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
         glfwMakeContextCurrent(window);
+    }
 
+    ~Window() {
+        glfwTerminate();
+    }
+
+    GLFWwindow* get() const { return window; }
+
+private:
+    GLFWwindow* window;
+};
+
+class RenderWindow : public Window {
+public:
+    RenderWindow(int width, int height, const std::string& title) : Window(width, height, title) {
         ImGui::CreateContext();
         ImNodes::CreateContext();
 
         ApplyCustomStyle();
 
-        ImGui_ImplGlfw_InitForOpenGL(window, true);
+        ImGui_ImplGlfw_InitForOpenGL(get(), true);
         ImGui_ImplOpenGL3_Init("#version 130");
         glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
     }
 
-    void Render(GLFWwindow* window) {
-        while (!glfwWindowShouldClose(window)) {
+    ~RenderWindow() {
+        ImGui_ImplOpenGL3_Shutdown();
+        ImGui_ImplGlfw_Shutdown();
+        ImGui::DestroyContext();
+    }
+
+    void Render() {
+        while (!glfwWindowShouldClose(get())) {
             glfwPollEvents();
 
             glClear(GL_COLOR_BUFFER_BIT);
@@ -57,7 +69,7 @@ namespace renderer {
 
             ImGui::SetNextWindowPos(ImVec2(0, 0));
             ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
-            ImGui::Begin("Background", nullptr, 
+            ImGui::Begin("Background", nullptr,
                 ImGuiWindowFlags_NoTitleBar |
                 ImGuiWindowFlags_NoMove |
                 ImGuiWindowFlags_NoResize |
@@ -79,15 +91,38 @@ namespace renderer {
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-            glfwSwapBuffers(window);
+            glfwSwapBuffers(get());
         }
     }
+};
 
-    void Terminate(GLFWwindow* window) {
-        ImGui_ImplOpenGL3_Shutdown();
-        ImGui_ImplGlfw_Shutdown();
-        ImGui::DestroyContext();
-        glfwTerminate();
+class View {
+public:
+    View(const std::string& title) : title(title) {}
+
+    virtual ~View() {}
+
+    void Render() {
+        if (!ui::views::states::running[title])
+            return;
+
+        ImGui::Begin(
+            title.c_str(),
+            &ui::views::states::running[title],
+            ImGuiWindowFlags_NoSavedSettings |
+            ImGuiWindowFlags_NoCollapse |
+            ImGuiWindowFlags_HorizontalScrollbar |
+            ImGuiWindowFlags_NoSavedSettings
+        );
+
+        Content();
+
+        ImGui::End();
     }
 
-}
+protected:
+    virtual void Content() = 0;
+
+private:
+    std::string title;
+};
