@@ -8,11 +8,9 @@
 #include <imjson/imjson.h>
 #include <interface/style.h>
 
-bool running = true;
-
 class TopBar : public View {
 public:
-	TopBar() : View("Top Bar", &running) {}
+	TopBar() : View("Top Bar", &state::running) {}
 
 protected:
 	void Content() override {

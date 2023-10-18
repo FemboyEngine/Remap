@@ -16,6 +16,7 @@ namespace state {
     std::vector<uint8_t> memory;
     std::vector<std::string> modules;
 
+    bool running = true;
     bool disassembled = false;
     bool mapped_strings = false;
 }
