@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <sstream>
 #include <map>
+#include <format>
 
 static char buffer[kMaxBufferSize];
 
@@ -55,13 +56,12 @@ void ui::views::Disassembly() {
                 ZydisFormatterFormatInstruction(&formatter, &instruction, operands, ZYDIS_MAX_OPERAND_COUNT, buffer,
                     sizeof(buffer), runtime_address + offset + i, NULL);
 
-                std::stringstream ss;
+                std::string bytes;
                 for (int j = 0; j < instruction.length; j++)
                 {
-                    ss << std::hex << std::setfill('0') << std::setw(2) << static_cast<int>(state::memory[i + j]) << " ";
+                    bytes += std::format("{:02x} ", static_cast<int>(state::memory[i + j]));
                 }
-                std::string bytes = ss.str();
-                
+
                 // | address | bytes | disassembly |
                 disasmText.emplace_back(runtime_address + offset + i, buffer, bytes);
             }
