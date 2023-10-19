@@ -119,7 +119,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;ZYDIS_STATIC_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\Mole\Projects\Repos\Remap\dependencies;D:\Mole\Projects\Repos\Remap\dependencies\GLFW\include;D:\Mole\Projects\Repos\Remap;D:\Mole\Projects\Repos\Remap\dependencies\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Mole\Projects\Repos\Remap\lib;D:\Mole\Projects\Repos\Remap\lib\GLFW\include;D:\Mole\Projects\Repos\Remap;D:\Mole\Projects\Repos\Remap\lib\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -128,95 +128,95 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;Zydis.lib;Zycore.lib;lua54.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\Mole\Projects\Repos\Remap\dependencies\GLFW\lib-vc2022;D:\Mole\Projects\Repos\Remap\dependencies\Zydis\lib;D:\Mole\Projects\Repos\Remap\dependencies\lua;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\Mole\Projects\Repos\Remap\lib\GLFW\lib-vc2022;D:\Mole\Projects\Repos\Remap\lib\Zydis\lib;D:\Mole\Projects\Repos\Remap\lib\lua;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dependencies\imgui\imgui.cpp" />
-    <ClCompile Include="dependencies\imgui\imgui_demo.cpp" />
-    <ClCompile Include="dependencies\imgui\imgui_draw.cpp" />
-    <ClCompile Include="dependencies\imgui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="dependencies\imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="dependencies\imgui\imgui_tables.cpp" />
-    <ClCompile Include="dependencies\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="dependencies\imjson\imjson.cpp" />
-    <ClCompile Include="dependencies\imnodes\imnodes.cpp" />
+    <ClCompile Include="lib\imgui\imgui.cpp" />
+    <ClCompile Include="lib\imgui\imgui_demo.cpp" />
+    <ClCompile Include="lib\imgui\imgui_draw.cpp" />
+    <ClCompile Include="lib\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="lib\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="lib\imgui\imgui_tables.cpp" />
+    <ClCompile Include="lib\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="lib\imjson\imjson.cpp" />
+    <ClCompile Include="lib\imnodes\imnodes.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\memory.h" />
     <ClInclude Include="core\state.h" />
-    <ClInclude Include="dependencies\GLFW\include\GLFW\glfw3.h" />
-    <ClInclude Include="dependencies\GLFW\include\GLFW\glfw3native.h" />
-    <ClInclude Include="dependencies\imgui\imconfig.h" />
-    <ClInclude Include="dependencies\imgui\imgui.h" />
-    <ClInclude Include="dependencies\imgui\imgui_impl_glfw.h" />
-    <ClInclude Include="dependencies\imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="dependencies\imgui\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="dependencies\imgui\imgui_internal.h" />
-    <ClInclude Include="dependencies\imgui\imstb_rectpack.h" />
-    <ClInclude Include="dependencies\imgui\imstb_textedit.h" />
-    <ClInclude Include="dependencies\imgui\imstb_truetype.h" />
-    <ClInclude Include="dependencies\imgui\stb_image.h" />
-    <ClInclude Include="dependencies\imjson\imjson.h" />
-    <ClInclude Include="dependencies\imnodes\imnodes.h" />
-    <ClInclude Include="dependencies\imnodes\imnodes_internal.h" />
-    <ClInclude Include="dependencies\lua\include\lauxlib.h" />
-    <ClInclude Include="dependencies\lua\include\lua.h" />
-    <ClInclude Include="dependencies\lua\include\lua.hpp" />
-    <ClInclude Include="dependencies\lua\include\luaconf.h" />
-    <ClInclude Include="dependencies\lua\include\lualib.h" />
-    <ClInclude Include="dependencies\nlohmann\json.hpp" />
-    <ClInclude Include="dependencies\Zycore\Allocator.h" />
-    <ClInclude Include="dependencies\Zycore\API\Memory.h" />
-    <ClInclude Include="dependencies\Zycore\API\Process.h" />
-    <ClInclude Include="dependencies\Zycore\API\Synchronization.h" />
-    <ClInclude Include="dependencies\Zycore\API\Terminal.h" />
-    <ClInclude Include="dependencies\Zycore\API\Thread.h" />
-    <ClInclude Include="dependencies\Zycore\ArgParse.h" />
-    <ClInclude Include="dependencies\Zycore\Atomic.h" />
-    <ClInclude Include="dependencies\Zycore\Bitset.h" />
-    <ClInclude Include="dependencies\Zycore\Comparison.h" />
-    <ClInclude Include="dependencies\Zycore\Defines.h" />
-    <ClInclude Include="dependencies\Zycore\Format.h" />
-    <ClInclude Include="dependencies\Zycore\Internal\AtomicGNU.h" />
-    <ClInclude Include="dependencies\Zycore\Internal\AtomicMSVC.h" />
-    <ClInclude Include="dependencies\Zycore\LibC.h" />
-    <ClInclude Include="dependencies\Zycore\List.h" />
-    <ClInclude Include="dependencies\Zycore\Object.h" />
-    <ClInclude Include="dependencies\Zycore\Status.h" />
-    <ClInclude Include="dependencies\Zycore\String.h" />
-    <ClInclude Include="dependencies\Zycore\Types.h" />
-    <ClInclude Include="dependencies\Zycore\Vector.h" />
-    <ClInclude Include="dependencies\Zycore\Zycore.h" />
-    <ClInclude Include="dependencies\Zydis\Decoder.h" />
-    <ClInclude Include="dependencies\Zydis\DecoderTypes.h" />
-    <ClInclude Include="dependencies\Zydis\Defines.h" />
-    <ClInclude Include="dependencies\Zydis\Disassembler.h" />
-    <ClInclude Include="dependencies\Zydis\Encoder.h" />
-    <ClInclude Include="dependencies\Zydis\Formatter.h" />
-    <ClInclude Include="dependencies\Zydis\FormatterBuffer.h" />
-    <ClInclude Include="dependencies\Zydis\Generated\EnumInstructionCategory.h" />
-    <ClInclude Include="dependencies\Zydis\Generated\EnumISAExt.h" />
-    <ClInclude Include="dependencies\Zydis\Generated\EnumISASet.h" />
-    <ClInclude Include="dependencies\Zydis\Generated\EnumMnemonic.h" />
-    <ClInclude Include="dependencies\Zydis\Generated\EnumRegister.h" />
-    <ClInclude Include="dependencies\Zydis\Internal\DecoderData.h" />
-    <ClInclude Include="dependencies\Zydis\Internal\EncoderData.h" />
-    <ClInclude Include="dependencies\Zydis\Internal\FormatterATT.h" />
-    <ClInclude Include="dependencies\Zydis\Internal\FormatterBase.h" />
-    <ClInclude Include="dependencies\Zydis\Internal\FormatterIntel.h" />
-    <ClInclude Include="dependencies\Zydis\Internal\SharedData.h" />
-    <ClInclude Include="dependencies\Zydis\Internal\String.h" />
-    <ClInclude Include="dependencies\Zydis\MetaInfo.h" />
-    <ClInclude Include="dependencies\Zydis\Mnemonic.h" />
-    <ClInclude Include="dependencies\Zydis\Register.h" />
-    <ClInclude Include="dependencies\Zydis\Segment.h" />
-    <ClInclude Include="dependencies\Zydis\SharedTypes.h" />
-    <ClInclude Include="dependencies\Zydis\ShortString.h" />
-    <ClInclude Include="dependencies\Zydis\Status.h" />
-    <ClInclude Include="dependencies\Zydis\Utils.h" />
-    <ClInclude Include="dependencies\zydis\Zydis.h" />
+    <ClInclude Include="lib\GLFW\include\GLFW\glfw3.h" />
+    <ClInclude Include="lib\GLFW\include\GLFW\glfw3native.h" />
+    <ClInclude Include="lib\imgui\imconfig.h" />
+    <ClInclude Include="lib\imgui\imgui.h" />
+    <ClInclude Include="lib\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="lib\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="lib\imgui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="lib\imgui\imgui_internal.h" />
+    <ClInclude Include="lib\imgui\imstb_rectpack.h" />
+    <ClInclude Include="lib\imgui\imstb_textedit.h" />
+    <ClInclude Include="lib\imgui\imstb_truetype.h" />
+    <ClInclude Include="lib\imgui\stb_image.h" />
+    <ClInclude Include="lib\imjson\imjson.h" />
+    <ClInclude Include="lib\imnodes\imnodes.h" />
+    <ClInclude Include="lib\imnodes\imnodes_internal.h" />
+    <ClInclude Include="lib\lua\include\lauxlib.h" />
+    <ClInclude Include="lib\lua\include\lua.h" />
+    <ClInclude Include="lib\lua\include\lua.hpp" />
+    <ClInclude Include="lib\lua\include\luaconf.h" />
+    <ClInclude Include="lib\lua\include\lualib.h" />
+    <ClInclude Include="lib\nlohmann\json.hpp" />
+    <ClInclude Include="lib\Zycore\Allocator.h" />
+    <ClInclude Include="lib\Zycore\API\Memory.h" />
+    <ClInclude Include="lib\Zycore\API\Process.h" />
+    <ClInclude Include="lib\Zycore\API\Synchronization.h" />
+    <ClInclude Include="lib\Zycore\API\Terminal.h" />
+    <ClInclude Include="lib\Zycore\API\Thread.h" />
+    <ClInclude Include="lib\Zycore\ArgParse.h" />
+    <ClInclude Include="lib\Zycore\Atomic.h" />
+    <ClInclude Include="lib\Zycore\Bitset.h" />
+    <ClInclude Include="lib\Zycore\Comparison.h" />
+    <ClInclude Include="lib\Zycore\Defines.h" />
+    <ClInclude Include="lib\Zycore\Format.h" />
+    <ClInclude Include="lib\Zycore\Internal\AtomicGNU.h" />
+    <ClInclude Include="lib\Zycore\Internal\AtomicMSVC.h" />
+    <ClInclude Include="lib\Zycore\LibC.h" />
+    <ClInclude Include="lib\Zycore\List.h" />
+    <ClInclude Include="lib\Zycore\Object.h" />
+    <ClInclude Include="lib\Zycore\Status.h" />
+    <ClInclude Include="lib\Zycore\String.h" />
+    <ClInclude Include="lib\Zycore\Types.h" />
+    <ClInclude Include="lib\Zycore\Vector.h" />
+    <ClInclude Include="lib\Zycore\Zycore.h" />
+    <ClInclude Include="lib\Zydis\Decoder.h" />
+    <ClInclude Include="lib\Zydis\DecoderTypes.h" />
+    <ClInclude Include="lib\Zydis\Defines.h" />
+    <ClInclude Include="lib\Zydis\Disassembler.h" />
+    <ClInclude Include="lib\Zydis\Encoder.h" />
+    <ClInclude Include="lib\Zydis\Formatter.h" />
+    <ClInclude Include="lib\Zydis\FormatterBuffer.h" />
+    <ClInclude Include="lib\Zydis\Generated\EnumInstructionCategory.h" />
+    <ClInclude Include="lib\Zydis\Generated\EnumISAExt.h" />
+    <ClInclude Include="lib\Zydis\Generated\EnumISASet.h" />
+    <ClInclude Include="lib\Zydis\Generated\EnumMnemonic.h" />
+    <ClInclude Include="lib\Zydis\Generated\EnumRegister.h" />
+    <ClInclude Include="lib\Zydis\Internal\DecoderData.h" />
+    <ClInclude Include="lib\Zydis\Internal\EncoderData.h" />
+    <ClInclude Include="lib\Zydis\Internal\FormatterATT.h" />
+    <ClInclude Include="lib\Zydis\Internal\FormatterBase.h" />
+    <ClInclude Include="lib\Zydis\Internal\FormatterIntel.h" />
+    <ClInclude Include="lib\Zydis\Internal\SharedData.h" />
+    <ClInclude Include="lib\Zydis\Internal\String.h" />
+    <ClInclude Include="lib\Zydis\MetaInfo.h" />
+    <ClInclude Include="lib\Zydis\Mnemonic.h" />
+    <ClInclude Include="lib\Zydis\Register.h" />
+    <ClInclude Include="lib\Zydis\Segment.h" />
+    <ClInclude Include="lib\Zydis\SharedTypes.h" />
+    <ClInclude Include="lib\Zydis\ShortString.h" />
+    <ClInclude Include="lib\Zydis\Status.h" />
+    <ClInclude Include="lib\Zydis\Utils.h" />
+    <ClInclude Include="lib\Zydis\Zydis.h" />
     <ClInclude Include="interface\renderer.h" />
     <ClInclude Include="interface\style.h" />
     <ClInclude Include="interface\views\Modules.h" />

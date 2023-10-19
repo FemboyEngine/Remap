@@ -18,66 +18,66 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dependencies\imgui\imgui.cpp">
+    <ClCompile Include="lib\imgui\imgui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dependencies\imgui\imgui_demo.cpp">
+    <ClCompile Include="lib\imgui\imgui_demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dependencies\imgui\imgui_draw.cpp">
+    <ClCompile Include="lib\imgui\imgui_draw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dependencies\imgui\imgui_impl_glfw.cpp">
+    <ClCompile Include="lib\imgui\imgui_impl_glfw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dependencies\imgui\imgui_impl_opengl3.cpp">
+    <ClCompile Include="lib\imgui\imgui_impl_opengl3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dependencies\imgui\imgui_tables.cpp">
+    <ClCompile Include="lib\imgui\imgui_tables.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dependencies\imgui\imgui_widgets.cpp">
+    <ClCompile Include="lib\imgui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dependencies\imnodes\imnodes.cpp">
+    <ClCompile Include="lib\imnodes\imnodes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dependencies\imjson\imjson.cpp">
+    <ClCompile Include="lib\imjson\imjson.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dependencies\GLFW\include\GLFW\glfw3.h">
+    <ClInclude Include="lib\GLFW\include\GLFW\glfw3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\GLFW\include\GLFW\glfw3native.h">
+    <ClInclude Include="lib\GLFW\include\GLFW\glfw3native.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\imgui\imconfig.h">
+    <ClInclude Include="lib\imgui\imconfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\imgui\imgui.h">
+    <ClInclude Include="lib\imgui\imgui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\imgui\imgui_impl_glfw.h">
+    <ClInclude Include="lib\imgui\imgui_impl_glfw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\imgui\imgui_impl_opengl3.h">
+    <ClInclude Include="lib\imgui\imgui_impl_opengl3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\imgui\imgui_impl_opengl3_loader.h">
+    <ClInclude Include="lib\imgui\imgui_impl_opengl3_loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\imgui\imgui_internal.h">
+    <ClInclude Include="lib\imgui\imgui_internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\imgui\imstb_rectpack.h">
+    <ClInclude Include="lib\imgui\imstb_rectpack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\imgui\imstb_textedit.h">
+    <ClInclude Include="lib\imgui\imstb_textedit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\imgui\imstb_truetype.h">
+    <ClInclude Include="lib\imgui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="interface\renderer.h">
@@ -98,154 +98,154 @@
     <ClInclude Include="interface\style.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\zydis\Zydis.h">
+    <ClInclude Include="lib\Zydis\Zydis.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Decoder.h">
+    <ClInclude Include="lib\Zydis\Decoder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\DecoderTypes.h">
+    <ClInclude Include="lib\Zydis\DecoderTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Defines.h">
+    <ClInclude Include="lib\Zydis\Defines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Disassembler.h">
+    <ClInclude Include="lib\Zydis\Disassembler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Encoder.h">
+    <ClInclude Include="lib\Zydis\Encoder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Formatter.h">
+    <ClInclude Include="lib\Zydis\Formatter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\FormatterBuffer.h">
+    <ClInclude Include="lib\Zydis\FormatterBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\MetaInfo.h">
+    <ClInclude Include="lib\Zydis\MetaInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Mnemonic.h">
+    <ClInclude Include="lib\Zydis\Mnemonic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Register.h">
+    <ClInclude Include="lib\Zydis\Register.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Segment.h">
+    <ClInclude Include="lib\Zydis\Segment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\SharedTypes.h">
+    <ClInclude Include="lib\Zydis\SharedTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\ShortString.h">
+    <ClInclude Include="lib\Zydis\ShortString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Status.h">
+    <ClInclude Include="lib\Zydis\Status.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Utils.h">
+    <ClInclude Include="lib\Zydis\Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\Allocator.h">
+    <ClInclude Include="lib\Zycore\Allocator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\ArgParse.h">
+    <ClInclude Include="lib\Zycore\ArgParse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\Atomic.h">
+    <ClInclude Include="lib\Zycore\Atomic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\Bitset.h">
+    <ClInclude Include="lib\Zycore\Bitset.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\Comparison.h">
+    <ClInclude Include="lib\Zycore\Comparison.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\Defines.h">
+    <ClInclude Include="lib\Zycore\Defines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\Format.h">
+    <ClInclude Include="lib\Zycore\Format.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\LibC.h">
+    <ClInclude Include="lib\Zycore\LibC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\List.h">
+    <ClInclude Include="lib\Zycore\List.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\Object.h">
+    <ClInclude Include="lib\Zycore\Object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\Status.h">
+    <ClInclude Include="lib\Zycore\Status.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\String.h">
+    <ClInclude Include="lib\Zycore\String.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\Types.h">
+    <ClInclude Include="lib\Zycore\Types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\Vector.h">
+    <ClInclude Include="lib\Zycore\Vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\Zycore.h">
+    <ClInclude Include="lib\Zycore\Zycore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Generated\EnumInstructionCategory.h">
+    <ClInclude Include="lib\Zydis\Generated\EnumInstructionCategory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Generated\EnumISAExt.h">
+    <ClInclude Include="lib\Zydis\Generated\EnumISAExt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Generated\EnumISASet.h">
+    <ClInclude Include="lib\Zydis\Generated\EnumISASet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Generated\EnumMnemonic.h">
+    <ClInclude Include="lib\Zydis\Generated\EnumMnemonic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Generated\EnumRegister.h">
+    <ClInclude Include="lib\Zydis\Generated\EnumRegister.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Internal\DecoderData.h">
+    <ClInclude Include="lib\Zydis\Internal\DecoderData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Internal\EncoderData.h">
+    <ClInclude Include="lib\Zydis\Internal\EncoderData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Internal\FormatterATT.h">
+    <ClInclude Include="lib\Zydis\Internal\FormatterATT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Internal\FormatterBase.h">
+    <ClInclude Include="lib\Zydis\Internal\FormatterBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Internal\FormatterIntel.h">
+    <ClInclude Include="lib\Zydis\Internal\FormatterIntel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Internal\SharedData.h">
+    <ClInclude Include="lib\Zydis\Internal\SharedData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zydis\Internal\String.h">
+    <ClInclude Include="lib\Zydis\Internal\String.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\API\Memory.h">
+    <ClInclude Include="lib\Zycore\API\Memory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\API\Process.h">
+    <ClInclude Include="lib\Zycore\API\Process.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\API\Synchronization.h">
+    <ClInclude Include="lib\Zycore\API\Synchronization.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\API\Terminal.h">
+    <ClInclude Include="lib\Zycore\API\Terminal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\API\Thread.h">
+    <ClInclude Include="lib\Zycore\API\Thread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\Internal\AtomicGNU.h">
+    <ClInclude Include="lib\Zycore\Internal\AtomicGNU.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\Zycore\Internal\AtomicMSVC.h">
+    <ClInclude Include="lib\Zycore\Internal\AtomicMSVC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="interface\views\Disassembly.h">
@@ -260,40 +260,40 @@
     <ClInclude Include="interface\views\Modules.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\imgui\stb_image.h">
+    <ClInclude Include="lib\imgui\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\imnodes\imnodes.h">
+    <ClInclude Include="lib\imnodes\imnodes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\imnodes\imnodes_internal.h">
+    <ClInclude Include="lib\imnodes\imnodes_internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="interface\views\NodeEditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\imjson\imjson.h">
+    <ClInclude Include="lib\imjson\imjson.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\nlohmann\json.hpp">
+    <ClInclude Include="lib\nlohmann\json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="interface\views\Scripting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\lua\include\lauxlib.h">
+    <ClInclude Include="lib\lua\include\lauxlib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\lua\include\lua.h">
+    <ClInclude Include="lib\lua\include\lua.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\lua\include\lua.hpp">
+    <ClInclude Include="lib\lua\include\lua.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\lua\include\luaconf.h">
+    <ClInclude Include="lib\lua\include\luaconf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependencies\lua\include\lualib.h">
+    <ClInclude Include="lib\lua\include\lualib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
