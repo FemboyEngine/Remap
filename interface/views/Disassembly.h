@@ -4,26 +4,21 @@
 */
 
 #include <Zydis/Zydis.h>
-#include <iomanip>
-#include <sstream>
-#include <map>
 #include <format>
+#include <map>
 
 class DisassemblyView : public View {
 public:
-    DisassemblyView() : View("Disassembly") {}
+    DisassemblyView() : View("Disassembly") {
+        ZydisDecoderInit(&decoder, ZYDIS_MACHINE_MODE_LONG_64, ZYDIS_STACK_WIDTH_64);
+        ZydisFormatterInit(&formatter, ZYDIS_FORMATTER_STYLE_INTEL);
+    }
 
 protected:
     void Content() override {
         if (state::current_process == NULL && state::pid == 0) return;
 
         if (state::disassembled == false) {
-            ZydisDecoder decoder;
-            ZydisDecoderInit(&decoder, ZYDIS_MACHINE_MODE_LONG_64, ZYDIS_STACK_WIDTH_64);
-
-            ZydisFormatter formatter;
-            ZydisFormatterInit(&formatter, ZYDIS_FORMATTER_STYLE_INTEL);
-
             disasmText.clear();
             disasmText.reserve(size / 16);
 
@@ -115,4 +110,7 @@ private:
     uint64_t runtime_address = 0;
     uint64_t offset = 0;
     std::vector<std::tuple<uint64_t, std::string, std::string>> disasmText;
+
+    ZydisFormatter formatter;
+    ZydisDecoder decoder;
 };
