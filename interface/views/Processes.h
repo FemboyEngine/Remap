@@ -23,17 +23,14 @@ protected:
         ImGui::PopItemWidth();
         ImGui::BeginChild("##processes", ImVec2(ImGui::GetWindowContentRegionWidth(), 0), true);
 
-        std::string input_lower = searchBuffer;
-        std::transform(input_lower.begin(), input_lower.end(), input_lower.begin(), ::tolower);
+        std::string search = to_lower(searchBuffer);
 
         for (auto& process : processes)
         {
-            std::string process_lower = process;
-            std::transform(process_lower.begin(), process_lower.end(), process_lower.begin(), ::tolower);
-
-            if (process_lower.find(input_lower) != std::string::npos)
-            {
-                ImGui::Text(process.c_str());
+            for (const auto& process : processes) {
+                if (to_lower(process).find(search) != std::string::npos) {
+                    ImGui::Text(process.c_str());
+                }
             }
 
             // Process selected, allocate memory
@@ -76,8 +73,13 @@ protected:
     }
 
 private:
-    static const int kMaxBufferSize = 1024;
-    char searchBuffer[kMaxBufferSize];
+    char searchBuffer[1024];
     std::string selected;
     std::vector<std::string> processes = remap::GetProcessesNames();
+
+    std::string to_lower(const std::string& str) {
+        std::string lower = str;
+        std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
+        return lower;
+    }
 };
