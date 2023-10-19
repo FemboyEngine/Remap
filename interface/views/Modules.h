@@ -11,6 +11,10 @@ public:
 	ModulesView() : View("Modules View") {}
 
 protected:
+	/**
+	 * Render the loaded modules viewer window.
+	 * Lists and displays the loaded modules of a selected process
+	 */
 	void Content() override {
 		if (state::current_process == NULL && state::pid == 0) return;
 

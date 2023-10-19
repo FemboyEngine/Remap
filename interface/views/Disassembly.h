@@ -15,6 +15,10 @@ public:
     }
 
 protected:
+    /**
+     * Render the disassembly view.
+     * Disassembles the binary code, displays it in a tabular format
+     */
     void Content() override {
         if (state::current_process == NULL && state::pid == 0) return;
 

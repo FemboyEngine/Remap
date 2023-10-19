@@ -19,6 +19,9 @@
 
 #include "style.h"
 
+/**
+ * Window - A base class for creating and managing the application window.
+ */
 class Window {
 public:
     Window(int width, int height, const std::string& title) {
@@ -40,6 +43,9 @@ private:
     GLFWwindow* window;
 };
 
+/**
+ * RenderWindow - A class for creating and managing the rendering window.
+ */
 class RenderWindow : public Window {
 public:
     RenderWindow(int width, int height, const std::string& title) : Window(width, height, title) {
@@ -71,6 +77,9 @@ public:
         ImGui::DestroyContext();
     }
 
+    /**
+     * Render - Render the views within the window.
+     */
     void Render() {
         while (!glfwWindowShouldClose(get())) {
             glfwPollEvents();

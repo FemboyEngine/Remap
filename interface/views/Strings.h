@@ -8,6 +8,10 @@ public:
     StringsView() : View("Strings") {}
 
 protected:
+    /**
+     * Render the strings viewer window.
+     * Displays and manages strings within the memory of a selected process
+     */
     void Content() override {
         if (state::current_process == NULL && state::pid == 0) return;
 

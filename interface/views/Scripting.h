@@ -38,6 +38,10 @@ public:
     ScriptingView() : View("Scripting") {}
 
 protected:
+    /**
+     * Render the Lua scripting window.
+     * Provides a Lua scripting environment for executing Lua scripts and displays the script output
+     */
     void Content() override {
         lua_State* L = luaL_newstate();
         luaL_openlibs(L);

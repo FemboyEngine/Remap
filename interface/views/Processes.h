@@ -14,6 +14,11 @@ public:
     ProcessesView() : View("Processes") {}
 
 protected:
+    /**
+     * Render the processes window.
+     * Displays a list of processes and allows users to search for a specific process,
+     * and selects a process to allocate memory for future operations
+     */
     void Content() override {
         ImGui::SetCursorPosX((ImGui::GetWindowContentRegionWidth() - 15) / 2);
 
@@ -43,8 +48,6 @@ protected:
                 state::pid = remap::GetProcessIdByName(selected.c_str());
                 state::current_process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, state::pid);
                 state::base_address = (LPCVOID)remap::GetProcessBaseAddress(state::pid);
-
-                std::cout << state::pid << std::endl;
 
                 MEMORY_BASIC_INFORMATION mbi;
                 std::vector<uint8_t> buffer = {};
