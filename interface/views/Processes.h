@@ -6,6 +6,7 @@
 #include "views.h"
 #include <core/memory.h>
 #include <core/state.h>
+
 #include <iostream>
 
 class ProcessesView : public View {
@@ -30,7 +31,7 @@ protected:
             std::string process_lower = process;
             std::transform(process_lower.begin(), process_lower.end(), process_lower.begin(), ::tolower);
 
-            if (strstr(process_lower.c_str(), input_lower.c_str()))
+            if (process_lower.find(input_lower) != std::string::npos)
             {
                 ImGui::Text(process.c_str());
             }
