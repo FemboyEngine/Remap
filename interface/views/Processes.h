@@ -23,14 +23,17 @@ protected:
         ImGui::PopItemWidth();
         ImGui::BeginChild("##processes", ImVec2(ImGui::GetWindowContentRegionWidth(), 0), true);
 
-        std::string search = to_lower(searchBuffer);
+        std::string input_lower = searchBuffer;
+        std::transform(input_lower.begin(), input_lower.end(), input_lower.begin(), ::tolower);
 
         for (auto& process : processes)
         {
-            for (const auto& process : processes) {
-                if (to_lower(process).find(search) != std::string::npos) {
-                    ImGui::Text(process.c_str());
-                }
+            std::string process_lower = process;
+            std::transform(process_lower.begin(), process_lower.end(), process_lower.begin(), ::tolower);
+
+            if (process_lower.find(input_lower) != std::string::npos)
+            {
+                ImGui::Text(process.c_str());
             }
 
             // Process selected, allocate memory
@@ -40,6 +43,8 @@ protected:
                 state::pid = remap::GetProcessIdByName(selected.c_str());
                 state::current_process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, state::pid);
                 state::base_address = (LPCVOID)remap::GetProcessBaseAddress(state::pid);
+
+                std::cout << state::pid << std::endl;
 
                 MEMORY_BASIC_INFORMATION mbi;
                 std::vector<uint8_t> buffer = {};
@@ -76,10 +81,4 @@ private:
     char searchBuffer[1024];
     std::string selected;
     std::vector<std::string> processes = remap::GetProcessesNames();
-
-    std::string to_lower(const std::string& str) {
-        std::string lower = str;
-        std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
-        return lower;
-    }
 };
