@@ -10,13 +10,17 @@ A dynamic, work-in-progress memory alteration utility
 | #   | Feature Description                                    | Priority | Difficulty |
 | --- | ------------------------------------------------------ | -------- | ---------- |
 | 1   | [Switch to Separate Header Placement](https://raw.githubusercontent.com/vector-of-bool/pitchfork/develop/data/spec.bs#src.header-placement.separate)                    | High     | Moderate   |
-| 2   | Implement Multiple Views of the Disassembly            | High     | Moderate   |
-| 3   | Identify Functions in Disassembly View using Prologues | Medium   | High       |
-| 4   | Interactive Byte-Patching in Disassembly               | High     | Moderate   |
-| 5   | Implement Array-of-Bytes Scan                          | High     | Moderate   |
-| 6   | Add Pointer Scan Functionality                         | High     | High       |
-| 7   | Hex View Interface                                     | Medium   | Moderate   |
+| 2   | Implement Dynamic Breakpoints                          | High     | High       |
+| 3   | Add Call Stack Inspection                              | High     | High       |
+| 4   | Continual Memory Reading and Disassembly               | High     | High       |
+| 5   | Implement Multiple Views of the Disassembly            | Medium   | High       |
+| 6   | Identify Functions in Disassembly View using Prologues | Medium   | Moderate   |
+| 7   | Interactive Byte-Patching in Disassembly               | Medium   | Moderate   |
+| 8   | Implement Array-of-Bytes Scan                          | Medium   | Moderate   |
+| 9   | Add Pointer Scan Functionality                         | Medium   | High       |
+| 10  | Hex View Interface                                     | Low      | Moderate   |
 
+7 Depends on 4.
 
 ## Contribution
 
