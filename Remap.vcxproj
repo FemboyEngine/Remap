@@ -142,6 +142,7 @@
     <ClCompile Include="lib\imjson\imjson.cpp" />
     <ClCompile Include="lib\imnodes\imnodes.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="zydis_wrapper\zydis_wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\memory.h" />
@@ -227,6 +228,7 @@
     <ClInclude Include="interface\views\Disassembly.h" />
     <ClInclude Include="interface\views\Processes.h" />
     <ClInclude Include="interface\views\views.h" />
+    <ClInclude Include="zydis_wrapper\zydis_wrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE" />

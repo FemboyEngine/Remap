@@ -3,16 +3,12 @@
 * - views/Disassembly.h
 */
 
-#include <Zydis/Zydis.h>
-#include <format>
+#include "zydis_wrapper/zydis_wrapper.h"
 #include <map>
 
 class DisassemblyView : public View {
 public:
-    DisassemblyView() : View("Disassembly") {
-        ZydisDecoderInit(&decoder, ZYDIS_MACHINE_MODE_LONG_64, ZYDIS_STACK_WIDTH_64);
-        ZydisFormatterInit(&formatter, ZYDIS_FORMATTER_STYLE_INTEL);
-    }
+    DisassemblyView() : View("Disassembly") {}
 
 protected:
     /**
@@ -30,26 +26,17 @@ protected:
 
             while (i < size)
             {
-                ZydisDecodedInstruction instruction;
-                ZydisDecodedOperand operands[ZYDIS_MAX_OPERAND_COUNT];
-                ZyanStatus status = ZydisDecoderDecodeFull(&decoder, &state::memory[i], size - i, &instruction, operands);
-                if (ZYAN_SUCCESS(status))
+                if (zydis.Disassemble(runtime_address + offset + i, &state::memory[i], size - i))
                 {
-                    char buffer[256];
-                    ZydisFormatterFormatInstruction(&formatter, &instruction, operands, ZYDIS_MAX_OPERAND_COUNT, buffer,
-                        sizeof(buffer), runtime_address + offset + i, NULL);
+                    std::string instruction = zydis.GetInstruction();
+                    std::string bytes = zydis.GetInstructionBytes(&state::memory[i]);
 
-                    std::string bytes;
-                    for (int j = 0; j < instruction.length; j++)
-                    {
-                        bytes += std::format("{:02x} ", static_cast<int>(state::memory[i + j]));
-                    }
+                    //printf("INS: %s\t%s\n", instruction, bytes);
 
                     // | address | bytes | disassembly |
-                    disasmText.emplace_back(runtime_address + offset + i, buffer, bytes);
+                    disasmText.emplace_back(runtime_address + offset + i, instruction, bytes);
                 }
-                i += instruction.length;
-
+                i += zydis.GetDecodedInstruction().length;
             }
 
             state::disassembled = true;
@@ -115,6 +102,5 @@ private:
     uint64_t offset = 0;
     std::vector<std::tuple<uint64_t, std::string, std::string>> disasmText;
 
-    ZydisFormatter formatter;
-    ZydisDecoder decoder;
+    Zydis zydis;
 };

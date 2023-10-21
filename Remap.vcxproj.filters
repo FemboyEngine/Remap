@@ -45,6 +45,9 @@
     <ClCompile Include="lib\imjson\imjson.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="zydis_wrapper\zydis_wrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\GLFW\include\GLFW\glfw3.h">
@@ -294,6 +297,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lib\lua\include\lualib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zydis_wrapper\zydis_wrapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
