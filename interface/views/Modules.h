@@ -8,7 +8,7 @@
 
 class ModulesView : public View {
 public:
-	ModulesView() : View("Modules View") {}
+	ModulesView() : View("Modules") {}
 
 protected:
 	/**
