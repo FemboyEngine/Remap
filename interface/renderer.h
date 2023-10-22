@@ -24,9 +24,9 @@
  */
 class Window {
 public:
-    Window(int width, int height, const std::string& title) {
+    Window(int width, int height, std::string_view title) {
         glfwInit();
-        window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
+        window = glfwCreateWindow(width, height, title.data(), nullptr, nullptr);
         glfwMakeContextCurrent(window);
     }
 
@@ -48,7 +48,7 @@ private:
  */
 class RenderWindow : public Window {
 public:
-    RenderWindow(int width, int height, const std::string& title) : Window(width, height, title) {
+    RenderWindow(int width, int height, std::string_view title) : Window(width, height, title) {
         ImGui::CreateContext();
         ImNodes::CreateContext();
 
@@ -58,20 +58,16 @@ public:
         ImGui_ImplOpenGL3_Init("#version 130");
         glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
 
-        views.push_back(new TopBar());
-        views.push_back(new ProcessesView());
-        views.push_back(new DisassemblyView());
-        views.push_back(new StringsView());
-        views.push_back(new ModulesView());
-        views.push_back(new ScriptingView());
-        views.push_back(new NodeEditor());
+        views.push_back(std::make_unique<TopBar>());
+        views.push_back(std::make_unique<ProcessesView>());
+        views.push_back(std::make_unique<DisassemblyView>());
+        views.push_back(std::make_unique<StringsView>());
+        views.push_back(std::make_unique<ModulesView>());
+        views.push_back(std::make_unique<ScriptingView>());
+        views.push_back(std::make_unique<NodeEditor>());
     }
 
     virtual ~RenderWindow() {
-        for (auto view : views) {
-            delete view;
-        }
-
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
@@ -102,7 +98,7 @@ public:
                 ImGuiWindowFlags_NoSavedSettings
             );
 
-            for (auto view : views) {
+            for (const auto& view : views) {
                 view->Render();
             }
 
@@ -119,5 +115,5 @@ public:
     RenderWindow& operator=(const RenderWindow&) = delete;
 
 private:
-    std::vector<View*> views;
+    std::vector<std::unique_ptr<View>> views;
 };
