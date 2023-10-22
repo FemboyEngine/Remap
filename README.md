@@ -19,8 +19,7 @@ A dynamic, work-in-progress memory alteration utility
 | 8   | Implement Array-of-Bytes Scan                          | Medium   | Moderate   |
 | 9   | Add Pointer Scan Functionality                         | Medium   | High       |
 | 10  | Hex View Interface                                     | Low      | Moderate   |
-| 11  | Zydis Wrapper Class                                    | High     | Moderate   |
-| 12  | Go-to address in disassembly                           | High     | Moderate   |
+| 11  | Go-to address in disassembly                           | High     | Moderate   |
 
 7 Depends on 4.
 
