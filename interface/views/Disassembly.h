@@ -53,16 +53,14 @@ protected:
             ImGui::Separator();
 
             ImGuiListClipper clipper;
-            clipper.Begin((int)disasmText.size());
+            clipper.Begin(static_cast<int>(disasmText.size()));
 
             std::string name = remap::GetProcessName(state::pid);
 
             while (clipper.Step()) {
                 for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
                 {
-                    uint64_t address = std::get<0>(disasmText[i]);
-                    std::string disassembly = std::get<1>(disasmText[i]);
-                    std::string bytes = std::get<2>(disasmText[i]);
+                    auto [address, disassembly, bytes] = disasmText[i];
 
                     // address column
                     std::string relative = std::format("{}+{:X}", name, address);
@@ -77,8 +75,8 @@ protected:
                     // disassembly column
                     ImVec4 blue = ImVec4(0.54f, 0.71f, 0.98f, 1.0f);
 
-                    std::string instruction = disassembly.substr(0, disassembly.find(" "));
-                    ImGui::TextColored(blue, instruction.c_str());
+                    std::string_view instruction = disassembly.substr(0, disassembly.find(" "));
+                    ImGui::TextColored(blue, instruction.data());
                     ImGui::SameLine();
                     ImGui::Text(disassembly.substr(instruction.length()).c_str());
                     ImGui::NextColumn();
