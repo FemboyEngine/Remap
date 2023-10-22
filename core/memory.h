@@ -13,6 +13,8 @@
 #include <Psapi.h>
 #include <sstream>
 
+#include <filesystem>
+
 const int kMaxSearchBufferSize = 256;
 const int kMaxBufferSize = 1024 * 1024 * 10;
 
@@ -115,14 +117,8 @@ namespace remap {
                     char sz_mod_name_a[MAX_PATH];
                     WideCharToMultiByte(CP_ACP, 0, sz_mod_name, -1, sz_mod_name_a, MAX_PATH, NULL, NULL);
 
-                    // remove path from module name
-                    std::string sz_mod_name_str = sz_mod_name_a;
-                    std::string::size_type pos = sz_mod_name_str.find_last_of("\\/");
-                    if (pos != std::string::npos) {
-                        sz_mod_name_str.erase(0, pos + 1);
-                    }
-
-                    modules.push_back(sz_mod_name_str);
+                    std::filesystem::path p(sz_mod_name_a);
+                    modules.push_back(p.filename().string());
                 }
             }
         }
