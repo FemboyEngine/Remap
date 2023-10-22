@@ -9,7 +9,7 @@ A dynamic, work-in-progress memory alteration utility
 ## Todo
 | #   | Feature Description                                    | Priority | Difficulty |
 | --- | ------------------------------------------------------ | -------- | ---------- |
-| 1   | [Switch to Separate Header Placement](https://raw.githubusercontent.com/vector-of-bool/pitchfork/develop/data/spec.bs#src.header-placement.separate)                    | High     | Moderate   |
+| 1   | [Switch to Separate Header Placement or Merged](https://raw.githubusercontent.com/vector-of-bool/pitchfork/develop/data/spec.bs#src.header-placement.separate)                    | High     | Moderate   |
 | 2   | Implement Dynamic Breakpoints                          | High     | High       |
 | 3   | Add Call Stack Inspection                              | High     | High       |
 | 4   | Continual Memory Reading and Disassembly               | High     | High       |
