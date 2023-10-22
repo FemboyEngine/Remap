@@ -75,7 +75,7 @@ protected:
                     // disassembly column
                     ImVec4 blue = ImVec4(0.54f, 0.71f, 0.98f, 1.0f);
 
-                    std::string_view instruction = disassembly.substr(0, disassembly.find(" "));
+                    std::string instruction = disassembly.substr(0, disassembly.find(" "));
                     ImGui::TextColored(blue, instruction.data());
                     ImGui::SameLine();
                     ImGui::Text(disassembly.substr(instruction.length()).c_str());
