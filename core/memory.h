@@ -22,7 +22,7 @@ namespace remap {
     std::string GetProcessName(uint32_t pid) {
         HANDLE h_process = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, pid);
         if (h_process == nullptr) {
-            return "";
+            return std::string();
         }
         char sz_process_name[MAX_PATH];
         if (GetModuleBaseNameA(h_process, nullptr, sz_process_name, sizeof(sz_process_name)) > 0) {
