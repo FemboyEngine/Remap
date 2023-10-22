@@ -3,8 +3,7 @@
 * - core/memory.h
 */
 
-#ifndef MEMORY_HPP
-#define MEMORY_HPP
+#pragma once
 
 #include <vector>
 #include <string>
@@ -132,5 +131,3 @@ namespace remap {
     }
 
 } // namespace remap
-
-#endif // MEMORY_HPP
