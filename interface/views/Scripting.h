@@ -53,20 +53,19 @@ protected:
         // push memory functions
         lua_pushcfunction(L, [](lua_State* L) -> int {
             int pid = lua_tointeger(L, 1);
-            lua_pushstring(L, remap::GetProcessName(pid).c_str());
+            lua_pushstring(L, remap::GetProcessName(pid).data());
             return 1;
             });
         lua_setglobal(L, "GetProcessName");
 
         lua_pushcfunction(L, [](lua_State* L) -> int {
-            std::vector<std::string> process_names = remap::GetProcessesNames();
+            auto process_names = remap::GetProcessesNames();
             lua_newtable(L);
-            for (int i = 0; i < process_names.size(); i++) {
+            for (size_t i = 0; i < process_names.size(); ++i) {
                 lua_pushinteger(L, i + 1);
-                lua_pushstring(L, process_names[i].c_str());
+                lua_pushstring(L, process_names[i].data());
                 lua_settable(L, -3);
             }
-            return 1;
             });
         lua_setglobal(L, "GetProcessesNames");
 
@@ -86,11 +85,11 @@ protected:
 
         lua_pushcfunction(L, [](lua_State* L) -> int {
             int pid = lua_tointeger(L, 1);
-            std::vector<std::string> modules = remap::GetLoadedModules(pid);
+            auto modules = remap::GetLoadedModules(pid);
             lua_newtable(L);
-            for (int i = 0; i < modules.size(); i++) {
+            for (size_t i = 0; i < modules.size(); ++i) {
                 lua_pushinteger(L, i + 1);
-                lua_pushstring(L, modules[i].c_str());
+                lua_pushstring(L, modules[i].data());
                 lua_settable(L, -3);
             }
             return 1;
