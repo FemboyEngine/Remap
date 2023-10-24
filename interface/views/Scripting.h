@@ -66,6 +66,7 @@ protected:
                 lua_pushstring(L, process_names[i].data());
                 lua_settable(L, -3);
             }
+            return 1;
             });
         lua_setglobal(L, "GetProcessesNames");
 
