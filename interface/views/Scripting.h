@@ -101,28 +101,23 @@ protected:
             DWORD pid = lua_tointeger(L, 1);
             uintptr_t address = lua_tointeger(L, 2);
             size_t size = lua_tointeger(L, 3);
-            char* buffer = new char[size];
+            std::unique_ptr<char[]> buffer(new char[size]);
             SIZE_T bytesRead;
-            HANDLE processHandle = OpenProcess(PROCESS_VM_READ, FALSE, pid);
-            if (processHandle != NULL) {
-                if (ReadProcessMemory(processHandle, (LPCVOID)address, buffer, size, &bytesRead)) {
-                    lua_pushlstring(L, buffer, bytesRead);
+            HANDLE handle = OpenProcess(PROCESS_VM_READ, FALSE, pid);
+            if (handle != NULL) {
+                if (ReadProcessMemory(handle, (LPCVOID)address, buffer.get(), size, &bytesRead)) {
+                    lua_pushlstring(L, buffer.get(), bytesRead);
                 }
                 else {
                     DWORD error = GetLastError();
-                    std::stringstream ss;
-                    ss << "Failed to read memory. Error code: " << error;
-                    lua_pushstring(L, ss.str().c_str());
+                    lua_pushstring(L, ("Failed to read memory. Error code: " + std::to_string(error)).c_str());
                 }
-                CloseHandle(processHandle);
+                CloseHandle(handle);
             }
             else {
                 DWORD error = GetLastError();
-                std::stringstream ss;
-                ss << "Failed to open process. Error code: " << error;
-                lua_pushstring(L, ss.str().c_str());
+                lua_pushstring(L, ("Failed to open process. Error code: " + std::to_string(error)).c_str());
             }
-            delete[] buffer;
             return 1;
             });
         lua_setglobal(L, "read");
@@ -130,30 +125,26 @@ protected:
         lua_pushcfunction(L, [](lua_State* L) -> int {
             DWORD pid = lua_tointeger(L, 1);
             uintptr_t address = lua_tointeger(L, 2);
-            size_t size = strlen(lua_tostring(L, 3));
-            char* buffer = new char[size];
-            memcpy(buffer, lua_tostring(L, 3), size);
+            const char* data = lua_tostring(L, 3);
+            size_t size = strlen(data);
+            std::unique_ptr<char[]> buffer(new char[size]);
+            memcpy(buffer.get(), data, size);
             SIZE_T bytesWritten;
-            HANDLE processHandle = OpenProcess(PROCESS_VM_WRITE | PROCESS_VM_OPERATION, FALSE, pid);
-            if (processHandle != NULL) {
-                if (WriteProcessMemory(processHandle, (LPVOID)address, buffer, size, &bytesWritten)) {
+            HANDLE handle = OpenProcess(PROCESS_VM_WRITE | PROCESS_VM_OPERATION, FALSE, pid);
+            if (handle != NULL) {
+                if (WriteProcessMemory(handle, (LPVOID)address, buffer.get(), size, &bytesWritten)) {
                     lua_pushboolean(L, true);
                 }
                 else {
                     DWORD error = GetLastError();
-                    std::stringstream ss;
-                    ss << "Failed to write memory. Error code: " << error;
-                    lua_pushstring(L, ss.str().c_str());
+                    lua_pushstring(L, ("Failed to write memory. Error code: " + std::to_string(error)).c_str());
                 }
-                CloseHandle(processHandle);
+                CloseHandle(handle);
             }
             else {
                 DWORD error = GetLastError();
-                std::stringstream ss;
-                ss << "Failed to open process. Error code: " << error;
-                lua_pushstring(L, ss.str().c_str());
+                lua_pushstring(L, ("Failed to open process. Error code: " + std::to_string(error)).c_str());
             }
-            delete[] buffer;
             return 1;
             });
         lua_setglobal(L, "write");
