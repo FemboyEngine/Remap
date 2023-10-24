@@ -24,12 +24,13 @@ int l_print(lua_State* L) {
             return luaL_error(L, "'tostring' must return a string to 'print'");
         }
         if (i > 1) {
-            ss << "\t";
+            ss << '\t';
         }
         ss << s;
         lua_pop(L, 1);
     }
-    OutputBuffer += ss.str() + "\n";
+    OutputBuffer += ss.str();
+    OutputBuffer += '\n';
     return 0;
 }
 
