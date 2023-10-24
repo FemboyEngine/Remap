@@ -151,9 +151,8 @@ protected:
 
         lua_pushcfunction(L, [](lua_State* L) -> int {
             int number = lua_tointeger(L, 1);
-            std::stringstream ss;
-            ss << "0x" << std::hex << number;
-            lua_pushstring(L, ss.str().c_str());
+            std::string hex = "0x" + std::format("{:x}", number);
+            lua_pushstring(L, hex.data());
             return 1;
             });
         lua_setglobal(L, "ToHex");
