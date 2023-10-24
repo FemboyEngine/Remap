@@ -45,6 +45,7 @@ public:
             return;
 
         if (window) {
+            ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
             ImGui::Begin(
                 title.data(),
                 flag,
