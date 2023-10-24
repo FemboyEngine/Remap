@@ -56,7 +56,7 @@ protected:
             lua_pushstring(L, remap::GetProcessName(pid).data());
             return 1;
             });
-        lua_setglobal(L, "GetProcessName");
+        lua_setglobal(L, "procname");
 
         lua_pushcfunction(L, [](lua_State* L) -> int {
             auto process_names = remap::GetProcessesNames();
@@ -68,21 +68,21 @@ protected:
             }
             return 1;
             });
-        lua_setglobal(L, "GetProcessesNames");
+        lua_setglobal(L, "procnames");
 
         lua_pushcfunction(L, [](lua_State* L) -> int {
             const char* process_name = lua_tostring(L, 1);
             lua_pushinteger(L, remap::GetProcessIdByName(process_name));
             return 1;
             });
-        lua_setglobal(L, "GetProcessIdByName");
+        lua_setglobal(L, "idbyname");
 
         lua_pushcfunction(L, [](lua_State* L) -> int {
             int pid = lua_tointeger(L, 1);
             lua_pushinteger(L, remap::GetProcessBaseAddress(pid));
             return 1;
             });
-        lua_setglobal(L, "GetProcessBaseAddress");
+        lua_setglobal(L, "baseaddr");
 
         lua_pushcfunction(L, [](lua_State* L) -> int {
             int pid = lua_tointeger(L, 1);
@@ -95,7 +95,7 @@ protected:
             }
             return 1;
             });
-        lua_setglobal(L, "GetLoadedModules");
+        lua_setglobal(L, "getmods");
 
         lua_pushcfunction(L, [](lua_State* L) -> int {
             DWORD pid = lua_tointeger(L, 1);
@@ -155,7 +155,7 @@ protected:
             lua_pushstring(L, hex.data());
             return 1;
             });
-        lua_setglobal(L, "ToHex");
+        lua_setglobal(L, "tohex");
 
         ImGui::InputTextMultiline("##input", l_buffer, IM_ARRAYSIZE(l_buffer),
             ImVec2(ImGui::GetContentRegionAvail().x, 0));
