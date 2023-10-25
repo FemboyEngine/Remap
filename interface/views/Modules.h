@@ -25,8 +25,6 @@ protected:
 		{
 			ImGui::Text("%s", module.c_str());
 		}
-
-		ImGui::End();
 	}
 
 private:
