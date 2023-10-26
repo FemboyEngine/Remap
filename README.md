@@ -20,8 +20,9 @@ A dynamic, work-in-progress memory alteration utility
 | 9   | Add Pointer Scan Functionality                         | Medium   | High       |
 | 10  | Hex View Interface                                     | Low      | Moderate   |
 | 11  | Go-to address in disassembly                           | High     | Moderate   |
-
-7 Depends on 4.
+| 12  | Less Memory Usage (Current is ~500MB ouch)             | High     | Moderate   |
+| 13  | Lazy Loading Disassembly                               | High     | Moderate   |
+| 14  | Custom Vector Class for storing the disassembly        | High     | Moderate   |
 
 ## Contribution
 
