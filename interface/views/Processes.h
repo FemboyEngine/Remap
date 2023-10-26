@@ -81,7 +81,7 @@ protected:
     }
 
 private:
-    char searchBuffer[1024];
+    char searchBuffer[1024] = "";
     std::string selected;
     std::vector<std::string> processes = remap::GetProcessesNames();
 };
