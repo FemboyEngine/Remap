@@ -50,21 +50,18 @@ protected:
                 state::base_address = (LPCVOID)remap::GetProcessBaseAddress(state::pid);
 
                 MEMORY_BASIC_INFORMATION mbi;
-                std::vector<uint8_t> buffer = {};
                 char* p = 0;
 
                 while (VirtualQueryEx(state::current_process, p, &mbi, sizeof(mbi))) {
                     if (mbi.State == MEM_COMMIT && (mbi.Protect & PAGE_GUARD) == 0 && mbi.Protect != PAGE_NOACCESS) {
-                        buffer.resize(mbi.RegionSize);
+                        std::vector<uint8_t> buffer(mbi.RegionSize);
                         SIZE_T bytesRead;
                         if (ReadProcessMemory(state::current_process, p, buffer.data(), mbi.RegionSize, &bytesRead)) {
-                            buffer.insert(buffer.end(), buffer.begin(), buffer.begin() + bytesRead);
+                            state::memory.insert(state::memory.end(), buffer.begin(), buffer.begin() + bytesRead);
                         }
                     }
                     p += mbi.RegionSize;
                 }
-
-                state::memory = std::move(buffer);
 
                 // reset flags
                 state::disassembled = false;
