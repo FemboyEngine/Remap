@@ -54,10 +54,13 @@ protected:
 
                 while (VirtualQueryEx(state::current_process, p, &mbi, sizeof(mbi))) {
                     if (mbi.State == MEM_COMMIT && (mbi.Protect & PAGE_GUARD) == 0 && mbi.Protect != PAGE_NOACCESS) {
-                        std::vector<uint8_t> buffer(mbi.RegionSize);
                         SIZE_T bytesRead;
-                        if (ReadProcessMemory(state::current_process, p, buffer.data(), mbi.RegionSize, &bytesRead)) {
-                            state::memory.insert(state::memory.end(), buffer.begin(), buffer.begin() + bytesRead);
+                        size_t oldSize = state::memory.size();
+                        state::memory.resize(oldSize + mbi.RegionSize);
+                        if (ReadProcessMemory(state::current_process, p, state::memory.data() + oldSize, mbi.RegionSize, &bytesRead)) {
+                            state::memory.resize(oldSize + bytesRead);
+                        } else {
+                            state::memory.resize(oldSize);
                         }
                     }
                     p += mbi.RegionSize;
