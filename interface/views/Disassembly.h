@@ -69,20 +69,20 @@ protected:
                     ImGui::NextColumn();
 
                     // bytes column
-                    ImGui::Text(bytes.c_str());
+                    ImGui::Text(bytes.data());
                     ImGui::NextColumn();
 
                     // disassembly column
                     ImVec4 blue = ImVec4(0.54f, 0.71f, 0.98f, 1.0f);
 
-                    std::string instruction = disassembly.substr(0, disassembly.find(" "));
+                    std::string_view instruction = disassembly.substr(0, disassembly.find(" "));
                     ImGui::TextColored(blue, instruction.data());
                     ImGui::SameLine();
-                    ImGui::Text(disassembly.substr(instruction.length()).c_str());
+                    ImGui::Text(disassembly.data() + instruction.length());
                     ImGui::NextColumn();
 
                     if (ImGui::IsItemHovered()) {
-                        ImGui::SetTooltip("%s\t%s", relative.c_str(), disassembly.c_str());
+                        ImGui::SetTooltip("%s\t%s", relative.c_str(), disassembly.data());
                     }
                 }
             }
