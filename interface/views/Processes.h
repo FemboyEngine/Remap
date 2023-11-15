@@ -51,19 +51,14 @@ protected:
 
                 MEMORY_BASIC_INFORMATION mbi;
                 std::vector<uint8_t> buffer = {};
-                buffer.reserve(1024 * 1024 * 100); // reserve 100 MB upfront
                 char* p = 0;
-                constexpr size_t bufferSize = 1024 * 1024 * 10;
 
                 while (VirtualQueryEx(state::current_process, p, &mbi, sizeof(mbi))) {
                     if (mbi.State == MEM_COMMIT && (mbi.Protect & PAGE_GUARD) == 0 && mbi.Protect != PAGE_NOACCESS) {
-                        for (size_t offset = 0; offset < mbi.RegionSize; offset += bufferSize) {
-                            size_t bytesToRead = (std::min)(bufferSize, mbi.RegionSize - offset);
-                            SIZE_T bytesRead;
-                            buffer.resize(bytesToRead);
-                            if (ReadProcessMemory(state::current_process, p + offset, buffer.data(), bytesToRead, &bytesRead)) {
-                                buffer.insert(buffer.end(), buffer.begin(), buffer.begin() + bytesRead);
-                            }
+                        buffer.resize(mbi.RegionSize);
+                        SIZE_T bytesRead;
+                        if (ReadProcessMemory(state::current_process, p, buffer.data(), mbi.RegionSize, &bytesRead)) {
+                            buffer.insert(buffer.end(), buffer.begin(), buffer.begin() + bytesRead);
                         }
                     }
                     p += mbi.RegionSize;
