@@ -27,10 +27,8 @@ auto Zydis::Disassemble(uint64_t address, const unsigned char* data, size_t size
         return false;
 
     visible_operand_count_ = 0;
-    for (ZyanU8 i = 0; i < instruction_.info.operand_count; ++i)
+    for (auto& operand : instruction_.operands)
     {
-        auto& operand = instruction_.operands[i];
-
         if (operand.type == ZYDIS_OPERAND_TYPE_IMMEDIATE && operand.imm.is_relative)
         {
             ZydisCalcAbsoluteAddress(&instruction_.info, &operand, address_, &operand.imm.value.u);
