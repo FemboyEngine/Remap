@@ -19,30 +19,39 @@ protected:
         if (state::current_process == NULL && state::pid == 0) return;
 
         if (state::disassembled == false) {
-            disasmText.clear();
-            disasmText.reserve(size / 16);
-
-            int i = 0;
-
-            while (i < size)
-            {
-                if (zydis.Disassemble(runtime_address + offset + i, &state::memory[i], size - i))
-                {
-                    std::string instruction = zydis.GetInstruction();
-                    std::string bytes = zydis.GetInstructionBytes(&state::memory[i]);
-
-                    //printf("INS: %s\t%s\n", instruction, bytes);
-
-                    // | address | bytes | disassembly |
-                    disasmText.emplace_back(runtime_address + offset + i, instruction, bytes);
-                }
-                i += zydis.GetDecodedInstruction().length;
-            }
+            ImGui::OpenPopup("Disassembling...");
+            std::thread disassemblyThread(&DisassemblyView::Disassemble, this);
+            disassemblyThread.detach();
 
             state::disassembled = true;
         }
 
+        if (popup) {
+            if (ImGui::BeginPopupModal("Disassembling...", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
+                ImGuiStyle& style = ImGui::GetStyle();
+
+                style.WindowPadding = ImVec2(20, 20);
+                style.WindowRounding = 10.0f;
+                style.FramePadding = ImVec2(10, 10);
+                style.FrameRounding = 5.0f;
+                style.ItemSpacing = ImVec2(10, 5);
+
+                ImGui::Text("Please wait while the disassembly is being processed.\n");
+                ImGui::Text("In the meantime, why not grab a cup of coffee or tea?\n\n");
+
+                if (ImGui::Button("Close")) {
+                    popup = false;
+
+                    style = orig_style;
+                }
+
+                ImGui::EndPopup();
+            }
+        }
+
         if (state::disassembled) {
+            std::lock_guard<std::mutex> lock(disasmMutex);
+
             ImGui::BeginChild("Disassembly", ImVec2(0, 0), true, ImGuiWindowFlags_HorizontalScrollbar);
 
             // column headers
@@ -93,12 +102,38 @@ protected:
     }
 
 private:
+    void Disassemble() {
+        std::vector<std::tuple<uint64_t, std::string, std::string>> disasmTextTemp;
+        disasmTextTemp.reserve(size / 16);
+
+        int i = 0;
+
+        while (i < size)
+        {
+            if (zydis.Disassemble(runtime_address + offset + i, &state::memory[i], size - i))
+            {
+                std::string instruction = zydis.GetInstruction();
+                std::string bytes = zydis.GetInstructionBytes(&state::memory[i]);
+
+                disasmTextTemp.emplace_back(runtime_address + offset + i, instruction, bytes);
+            }
+            i += zydis.GetDecodedInstruction().length;
+        }
+
+        std::lock_guard<std::mutex> lock(disasmMutex);
+        disasmText.swap(disasmTextTemp);
+    }
+
     static const int kMaxBufferSize = 1024 * 1024 * 15;
     char buffer[kMaxBufferSize];
     SIZE_T size = sizeof(buffer);
     uint64_t runtime_address = 0;
     uint64_t offset = 0;
     std::vector<std::tuple<uint64_t, std::string, std::string>> disasmText;
+    std::mutex disasmMutex;
+
+    bool popup = true;
 
     Zydis zydis;
+    ImGuiStyle orig_style = ImGui::GetStyle();
 };
