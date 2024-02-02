@@ -9,6 +9,14 @@ extern "C" {
     #include <lualib.h>
 }
 
+#define LUA_ERR(L, msg) \
+ do { \
+   DWORD error = GetLastError(); \
+   std::string message = std::string(msg) + ". Error code: " + std::to_string(error); \
+   lua_pushstring(L, message.c_str()); \
+   return lua_error(L); \
+ } while (0)
+
 static std::string OutputBuffer;
 
 int l_print(lua_State* L) {
@@ -109,14 +117,12 @@ protected:
                     lua_pushlstring(L, buffer.get(), bytesRead);
                 }
                 else {
-                    DWORD error = GetLastError();
-                    lua_pushstring(L, ("Failed to read memory. Error code: " + std::to_string(error)).c_str());
+                    LUA_ERR(L, "Failed to read memory");
                 }
                 CloseHandle(handle);
             }
             else {
-                DWORD error = GetLastError();
-                lua_pushstring(L, ("Failed to open process. Error code: " + std::to_string(error)).c_str());
+                LUA_ERR(L, "Failed to open process");
             }
             return 1;
             });
@@ -136,14 +142,12 @@ protected:
                     lua_pushboolean(L, true);
                 }
                 else {
-                    DWORD error = GetLastError();
-                    lua_pushstring(L, ("Failed to write memory. Error code: " + std::to_string(error)).c_str());
+                    LUA_ERR(L, "Failed to write memory");
                 }
                 CloseHandle(handle);
             }
             else {
-                DWORD error = GetLastError();
-                lua_pushstring(L, ("Failed to open process. Error code: " + std::to_string(error)).c_str());
+                LUA_ERR(L, "Failed to open process");
             }
             return 1;
             });
