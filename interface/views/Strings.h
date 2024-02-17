@@ -50,7 +50,5 @@ protected:
     }
 
 private:
-    MEMORY_BASIC_INFORMATION memInfo;
-    LPVOID address = NULL;
     std::vector<std::string> strings;
 };
