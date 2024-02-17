@@ -24,52 +24,51 @@ namespace ui::views::states {
  * This class allows for the creation and rendering of various views within the application
  *
  * @param title: The title of the view
- * @param window: Indicates whether to create a window for the view (default is true)
- * @param flag: A pointer to a flag that controls the visibility of the view (default is nullptr)
+ * @param window: Indicates whether to create a window for the view
+ * @param flag: A pointer to a flag that controls the visibility of the view
  */
 class View {
 public:
-    View(std::string_view title, bool window = true /* Create Window? */, bool* flag = nullptr)
-        : title(title), vflag(flag), window(window) {}
-
-    virtual ~View() = default;
+    View(const char* title, bool create_window = true, bool* visibility_flag = nullptr)
+        : title(title), create_window(create_window), visibility_flag(visibility_flag) {}
 
     /**
      * Render - Render the view.
      *
-     * This function renders the view based on its visibility flag and whether it should be displayed in a window
+     * This function renders the view based on its visibility flag
+     * and whether it should be displayed in a window
      */
     void Render() {
-        bool* flag = vflag ? vflag : &ui::views::states::running[std::string(title)];
+        bool* flag = visibility_flag ?
+            visibility_flag : &ui::views::states::running[std::string(title)];
         if (!*flag)
             return;
 
-        if (window) {
+        if (create_window) {
             ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
-            ImGui::Begin(
-                title.data(),
-                flag,
-                ImGuiWindowFlags_NoSavedSettings |
-                ImGuiWindowFlags_NoCollapse |
-                ImGuiWindowFlags_HorizontalScrollbar
-            );
+            if (ImGui::Begin(title, visibility_flag, 
+                ImGuiWindowFlags_NoSavedSettings | 
+                ImGuiWindowFlags_NoCollapse | 
+                ImGuiWindowFlags_HorizontalScrollbar)) {
+
+                Content();
+                ImGui::End();
+            }
         }
-
-        Content();
-
-        ImGui::End();
+        else {
+            Content();
+        }
     }
 
 protected:
     /**
-     * Content - Define the content of the view.
-     *
-     * This pure virtual function must be implemented in derived classes to define the content of the view
+     * This pure virtual function must be implemented
+     * in derived classes to define the content of the view
      */
     virtual void Content() = 0;
 
 private:
-    std::string_view title;
-    bool window;
-    bool* vflag;
+    const char* title;
+    bool create_window;
+    bool* visibility_flag;
 };
